@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+    
+    <display_name>Posts extender for Mobile Controller</display_name>
+    <icon>fa-mobile</icon>
+    <description><![CDATA[
+        Blogging engine extender for the BardCanvas Mobile Platform
+    ]]></description>
+    
+    <default_service_types>
+        <posts_main>Posts: Main index</posts_main>
+        <posts_alt1>Posts: Alternate index 1</posts_alt1>
+        <posts_alt2>Posts: Alternate index 2</posts_alt2>
+        <posts_alt3>Posts: Alternate index 3</posts_alt3>
+    </default_service_types>
+    
+    <default_service_labels>
+        <posts_main>Home</posts_main>
+        <posts_alt1></posts_alt1>
+        <posts_alt2></posts_alt2>
+        <posts_alt3></posts_alt3>
+    </default_service_labels>
+    
+    <messages>
+        <missing_scope>Error: posts scope to show not received. No posts will be delivered.</missing_scope>
+        <invalid_scope>Error: the posts scope that has been received wasn't recognized. No posts will be delivered.</invalid_scope>
+    </messages>
+    
+    <all_categories>Todas las categorías</all_categories>
+    
+</language>

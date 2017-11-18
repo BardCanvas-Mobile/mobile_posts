@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+    
+    <version>0.0.1</version>
+    <group>modules_misc</group>
+    
+    <working_flags>
+        <install>true</install>
+        <uninstall>true</uninstall>
+        <enable>true</enable>
+        <disable>true</disable>
+    </working_flags>
+    
+    <extends_to>
+        <mobile_controller>
+            <services_registry>
+                <definitions>extenders/mobile_controller/services_registry_definitions.inc</definitions>
+            </services_registry>
+        </mobile_controller>
+    </extends_to>
+    
+</module>
