@@ -39,31 +39,31 @@
         <specs key="posts_main_style" required_modules="posts">
             <title>Estilo de despliegue</title>
             <description><![CDATA[
-                    Elige el estilo de despliegue de las entradas:
-                    <ul>
-                        <li>
-                            <b>Muro simple de tarjetas:</b>
-                            Muestra sólo texto, dividiendo los detalles en secciones.
-                        </li>
-                        <li>
-                            <b>Muro de tarjetas "moderno":</b>
-                            Muestra el título en texto blanco con sombra
-                            <b>dentro</b> de la imagen destacada.
-                        </li>
-                        <li>
-                            <b>Muro de tarjetas estilo Facebook:</b>
-                            Dividido en tres secciones:
-                            Datos del autor y fecha de publicación en el encabezado,
-                            Título, imagen destacada y extracto en otra sección
-                            y una sección extra con los datos adicionales (comentarios, etc.)
-                        </li>
-                        <li>
-                            <b>Listado de medios:</b>
-                            Despliegue similar a Twitter, poniendo el avatar del
-                            autor a la izquierda y los datos a la derecha.
-                        </li>
-                    </ul>
-                ]]></description>
+                Elige el estilo de despliegue de las entradas:
+                <ul>
+                    <li>
+                        <b>Muro simple de tarjetas:</b>
+                        Muestra sólo texto, dividiendo los detalles en secciones.
+                    </li>
+                    <li>
+                        <b>Muro de tarjetas "moderno":</b>
+                        Muestra el título en texto blanco con sombra
+                        <b>dentro</b> de la imagen destacada.
+                    </li>
+                    <li>
+                        <b>Muro de tarjetas estilo Facebook:</b>
+                        Dividido en tres secciones:
+                        Datos del autor y fecha de publicación en el encabezado,
+                        Título, imagen destacada y extracto en otra sección
+                        y una sección extra con los datos adicionales (comentarios, etc.)
+                    </li>
+                    <li>
+                        <b>Listado de medios:</b>
+                        Despliegue similar a Twitter, poniendo el avatar del
+                        autor a la izquierda y los datos a la derecha.
+                    </li>
+                </ul>
+            ]]></description>
             <type>list</type>
             <options>
                 <option value="feed/cards:simple"  >Muro simple de tarjetas</option>
@@ -76,561 +76,709 @@
         <specs key="posts_main_batch_size" required_modules="posts">
             <title>Cantidad de entradas por lote</title>
             <description><![CDATA[
-                    Especifica la cantidad de entradas a descargar por lote.<br>
-                    Valor predeterminado: <code>10</code>.
-                ]]></description>
+                Especifica la cantidad de entradas a descargar por lote.<br>
+                Valor predeterminado: <code>10</code>.
+            ]]></description>
             <type>number</type>
         </specs>
         
         <specs key="posts_main_comments_in_index" required_modules="posts">
             <title>Incluír comentarios</title>
             <description><![CDATA[
-                    Activa esta opción para incluír los comentarios en el índice.<br>
-                    <i class="fa fa-info-circle"></i> Nota:
-                    Esta opción se ignorará si el sistema de comentarios está
-                    inactivo o sobreescrito por un módulo de fuente externa,
-                    como lo son los comentarios de Facebook.
-                ]]></description>
+                Activa esta opción para incluír los comentarios en el índice.<br>
+                <i class="fa fa-info-circle"></i> Nota:
+                Esta opción se ignorará si el sistema de comentarios está
+                inactivo o sobreescrito por un módulo de fuente externa,
+                como lo son los comentarios de Facebook.
+            ]]></description>
             <type>boolean</type>
         </specs>
         
         <specs key="posts_main_listed_categories" required_modules="posts">
             <title>Categorías a incluír</title>
             <description><![CDATA[
-                    Lista de slugs de categorías a mostrar en este índice.
-                    De no especificarse, se incluirán todas.
-                ]]></description>
+                Lista de slugs de categorías a mostrar en este índice.
+                De no especificarse, se incluirán todas.
+            ]]></description>
             <type>code</type>
         </specs>
-
-        <specs key="posts_main_hashtags_only" required_modules="posts">
+        
+        <specs key="posts_main_excluded_categories" required_modules="posts">
+            <title>Categorías a excluír</title>
+            <description><![CDATA[
+                Lista de slugs de categorías que no deseas mostrar en este índice.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_main_listed_hashtags" required_modules="posts">
             <title>Limitar a las siguientes etiquetas</title>
             <description><![CDATA[
-                    Si deseas que sólo se muestren entradas que contengan ciertas
-                    etiquetas (hashtags), especificalas aquí, una por línea.
-                    Las entradas que tengan al menos una de las etiquetas de la lista
-                    serán incluídas.
-                ]]></description>
+                Si deseas que sólo se muestren entradas que contengan ciertas
+                etiquetas (hashtags), especificalas aquí, una por línea.
+                Las entradas que tengan al menos una de las etiquetas de la lista
+                serán incluídas.
+            ]]></description>
             <type>code</type>
         </specs>
-
-        <specs key="posts_main_author_levels_filter" required_modules="posts">
-            <title>Limitar a los siguientes niveles de autor</title>
+        
+        <specs key="posts_main_excluded_hashtags" required_modules="posts">
+            <title>Excluír entradas con las siguientes etiquetas</title>
             <description><![CDATA[
-                    Si deseas que sólo ciertos niveles de usuario de los autores de las
-                    entradas sean mostrados, especifica los niveles separados por comas.
-                ]]></description>
-            <type>text</type>
+                Si deseas que no se muestren entradas que contengan ciertas
+                etiquetas (hashtags), especificalas aquí, una por línea.
+                Las entradas que tengan al menos una de las etiquetas de la lista
+                serán incluídas.
+            ]]></description>
+            <type>code</type>
         </specs>
-
+        
         <specs key="posts_main_show_authors" required_modules="posts">
             <title>Mostrar autores</title>
             <description><![CDATA[
-                    Si tu sitio web es multi autor y deseas que en los índices y
-                    entradas individuales se acredite la autoría, habilita esta opción.
-                ]]></description>
+                Si tu sitio web es multi autor y deseas que en los índices y
+                entradas individuales se acredite la autoría, habilita esta opción.
+            ]]></description>
             <type>boolean</type>
         </specs>
-
+        
+        <specs key="posts_main_listed_author_levels" required_modules="posts">
+            <title>Limitar a los siguientes niveles de autor</title>
+            <description><![CDATA[
+                Si deseas que sólo ciertos niveles de usuario de los autores de las
+                entradas sean mostrados, especifica los niveles separados por comas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_main_excluded_author_levels" required_modules="posts">
+            <title>Excluir los siguientes niveles de autor</title>
+            <description><![CDATA[
+                Si quieres que las entradas de ciertos niveles de autor no se muestren,
+                especifica aquí los niveles separados por comas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
         <specs key="posts_main_hide_category_selector" required_modules="posts">
             <title>¿Ocultar selector de categorías?</title>
             <description><![CDATA[
-                    De forma predeterminada, se mostrará un selector de categoría
-                    <b>si hay más de una categoría</b> enlistada.
-                    Puedes desactivarlo usando esta opción.
-                ]]></description>
+                De forma predeterminada, se mostrará un selector de categoría
+                <b>si hay más de una categoría</b> enlistada.
+                Puedes desactivarlo usando esta opción.
+            ]]></description>
             <type>yes/no</type>
         </specs>
-
+        
         <specs key="posts_main_hide_search_helper" required_modules="posts">
             <title>¿Ocultar buscador?</title>
             <description><![CDATA[
-                    De forma predeterminada, se mostrará un control para buscar
-                    en todas las entradas incluídas.
-                    Puedes desactivarlo usando esta opción.
-                ]]></description>
+                De forma predeterminada, se mostrará un control para buscar
+                en todas las entradas incluídas.
+                Puedes desactivarlo usando esta opción.
+            ]]></description>
             <type>yes/no</type>
         </specs>
-
+        
         <specs key="posts_main_standard_icon" required_modules="posts">
             <title>Icono estándar del servicio</title>
             <description><![CDATA[
-                    La plataforma móvil usa iconos distiontos para iOS y Android.
-                    Para iOS, se usa el set de Framework7 y para Android se usa Font Awesome.
-                    Aquí debes especificar ambos separados por una coma, p.e.:<br><br>
-                    
-                    <code>home,fa-home</code><br><br>
-                    
-                    <i class="fa fa-warning"></i> <b>Importante:</b>
-                    Asegúrate de especificar la llave del ícono correcta en ambos casos, de lo contrario,
-                    tu sitio web puede recibir críticas negativas por falta de homogeneidad entre plataformas.
-                    
-                    <ul>
-                        <li><a href="http://framework7.io/icons/" target="_blank">Ver referencia de Framework7</a></li>
-                        <li><a href="http://fontawesome.io/icons/" target="_blank">Ver referencia de Font Awesome</a></li>
-                    </ul>
-                    <i class="fa fa-info-circle"></i>
-                    Si deseas usar una imagen, deja este valor vacío y usa el selector debajo.
-                ]]></description>
+                La plataforma móvil usa iconos distiontos para iOS y Android.
+                Para iOS, se usa el set de Framework7 y para Android se usa Font Awesome.
+                Aquí debes especificar ambos separados por una coma, p.e.:<br><br>
+                
+                <code>home,fa-home</code><br><br>
+                
+                <i class="fa fa-warning"></i> <b>Importante:</b>
+                Asegúrate de especificar la llave del ícono correcta en ambos casos, de lo contrario,
+                tu sitio web puede recibir críticas negativas por falta de homogeneidad entre plataformas.
+                
+                <ul>
+                    <li><a href="http://framework7.io/icons/" target="_blank">Ver referencia de Framework7</a></li>
+                    <li><a href="http://fontawesome.io/icons/" target="_blank">Ver referencia de Font Awesome</a></li>
+                </ul>
+                <i class="fa fa-info-circle"></i>
+                Si deseas usar una imagen, deja este valor vacío y usa el selector debajo.
+            ]]></description>
             <type>text</type>
         </specs>
-
+        
         <specs key="posts_main_image_icon" required_modules="posts">
             <title>Icono gráfico del servicio</title>
             <description><![CDATA[
-                    Puedes usar una imagen en lugar del icono estándar para el servicio
-                    usando este selector.<br>
-                    <i class="fa fa-info-circle"></i>
-                    Usa de preferencia un archivo PNG de al menos <code>256x256</code> pixeles.
-                    <b>No uses imágenes rectangulares.</b>
-                ]]></description>
+                Puedes usar una imagen en lugar del icono estándar para el servicio
+                usando este selector.<br>
+                <i class="fa fa-info-circle"></i>
+                Usa de preferencia un archivo PNG de al menos <code>256x256</code> pixeles.
+                <b>No uses imágenes rectangulares.</b>
+            ]]></description>
             <type>@gallery:specs_renderer/image_selector</type>
             <options>
                 <image_size>full</image_size>
             </options>
         </specs>
-
+        
         <!-- ==================================================== -->
         <specs is_separator="true" required_modules="posts"><![CDATA[
                 Servicios: Entradas / índice alternativo 1
                 <i>Úsalo sólo si deseas presentar más de un índice de entradas</i>
             ]]></specs>
         <!-- ============================================================= -->
-
+        
         <specs key="posts_alt1_style" required_modules="posts">
             <title>Estilo de despliegue</title>
             <description><![CDATA[
-                    Elige el estilo de despliegue de las entradas:
-                    <ul>
-                        <li>
-                            <b>Muro de tarjetas:</b>
-                            Despliegue similar a Facebook, dando énfasis a las imágenes
-                            destacadas de las entradas.
-                        </li>
-                        <li>
-                            <b>Listado de medios:</b>
-                            Despliegue similar a Twitter, poniendo el avatar del
-                            autor a la izquierda y los datos a la derecha.
-                        </li>
-                    </ul>
-                ]]></description>
+                Elige el estilo de despliegue de las entradas:
+                <ul>
+                    <li>
+                        <b>Muro simple de tarjetas:</b>
+                        Muestra sólo texto, dividiendo los detalles en secciones.
+                    </li>
+                    <li>
+                        <b>Muro de tarjetas "moderno":</b>
+                        Muestra el título en texto blanco con sombra
+                        <b>dentro</b> de la imagen destacada.
+                    </li>
+                    <li>
+                        <b>Muro de tarjetas estilo Facebook:</b>
+                        Dividido en tres secciones:
+                        Datos del autor y fecha de publicación en el encabezado,
+                        Título, imagen destacada y extracto en otra sección
+                        y una sección extra con los datos adicionales (comentarios, etc.)
+                    </li>
+                    <li>
+                        <b>Listado de medios:</b>
+                        Despliegue similar a Twitter, poniendo el avatar del
+                        autor a la izquierda y los datos a la derecha.
+                    </li>
+                </ul>
+            ]]></description>
             <type>list</type>
             <options>
-                <option value="feed/cards">Muro de tarjetas</option>
-                <option value="feed/media_list">Listado de medios</option>
+                <option value="feed/cards:simple"  >Muro simple de tarjetas</option>
+                <option value="feed/cards:modern"  >Muro de tarjetas "moderno"</option>
+                <option value="feed/cards:facebook">Muro de tarjetas estilo Facebook</option>
+                <option value="feed/media_list"    >Listado de medios</option>
             </options>
         </specs>
-
+        
         <specs key="posts_alt1_batch_size" required_modules="posts">
             <title>Cantidad de entradas por lote</title>
             <description><![CDATA[
-                    Especifica la cantidad de entradas a descargar por lote.<br>
-                    Valor predeterminado: <code>10</code>.
-                ]]></description>
+                Especifica la cantidad de entradas a descargar por lote.<br>
+                Valor predeterminado: <code>10</code>.
+            ]]></description>
             <type>number</type>
         </specs>
-
+        
         <specs key="posts_alt1_comments_in_index" required_modules="posts">
             <title>Incluír comentarios</title>
             <description><![CDATA[
-                    Activa esta opción para incluír los comentarios en el índice.<br>
-                    <i class="fa fa-info-circle"></i> Nota:
-                    Esta opción se ignorará si el sistema de comentarios está
-                    inactivo o sobreescrito por un módulo de fuente externa,
-                    como lo son los comentarios de Facebook.
-                ]]></description>
+                Activa esta opción para incluír los comentarios en el índice.<br>
+                <i class="fa fa-info-circle"></i> Nota:
+                Esta opción se ignorará si el sistema de comentarios está
+                inactivo o sobreescrito por un módulo de fuente externa,
+                como lo son los comentarios de Facebook.
+            ]]></description>
             <type>boolean</type>
         </specs>
-
+        
         <specs key="posts_alt1_listed_categories" required_modules="posts">
             <title>Categorías a incluír</title>
             <description><![CDATA[
-                    Lista de slugs de categorías a mostrar en este índice.
-                    De no especificarse, se incluirán todas.
-                ]]></description>
+                Lista de slugs de categorías a mostrar en este índice.
+                De no especificarse, se incluirán todas.
+            ]]></description>
             <type>code</type>
         </specs>
-
-        <specs key="posts_alt1_hashtags_only" required_modules="posts">
+        
+        <specs key="posts_alt1_excluded_categories" required_modules="posts">
+            <title>Categorías a excluír</title>
+            <description><![CDATA[
+                Lista de slugs de categorías que no deseas mostrar en este índice.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt1_listed_hashtags" required_modules="posts">
             <title>Limitar a las siguientes etiquetas</title>
             <description><![CDATA[
-                    Si deseas que sólo se muestren entradas que contengan ciertas
-                    etiquetas (hashtags), especificalas aquí, una por línea.
-                    Las entradas que tengan al menos una de las etiquetas de la lista
-                    serán incluídas.
-                ]]></description>
+                Si deseas que sólo se muestren entradas que contengan ciertas
+                etiquetas (hashtags), especificalas aquí, una por línea.
+                Las entradas que tengan al menos una de las etiquetas de la lista
+                serán incluídas.
+            ]]></description>
             <type>code</type>
         </specs>
-
-        <specs key="posts_alt1_author_levels_filter" required_modules="posts">
-            <title>Limitar a los siguientes niveles de autor</title>
+        
+        <specs key="posts_alt1_excluded_hashtags" required_modules="posts">
+            <title>Excluír entradas con las siguientes etiquetas</title>
             <description><![CDATA[
-                    Si deseas que sólo ciertos niveles de usuario de los autores de las
-                    entradas sean mostrados, especifica los niveles separados por comas.
-                ]]></description>
-            <type>text</type>
+                Si deseas que no se muestren entradas que contengan ciertas
+                etiquetas (hashtags), especificalas aquí, una por línea.
+                Las entradas que tengan al menos una de las etiquetas de la lista
+                serán incluídas.
+            ]]></description>
+            <type>code</type>
         </specs>
-
+        
         <specs key="posts_alt1_show_authors" required_modules="posts">
             <title>Mostrar autores</title>
             <description><![CDATA[
-                    Si tu sitio web es multi autor y deseas que en los índices y
-                    entradas individuales se acredite la autoría, habilita esta opción.
-                ]]></description>
+                Si tu sitio web es multi autor y deseas que en los índices y
+                entradas individuales se acredite la autoría, habilita esta opción.
+            ]]></description>
             <type>boolean</type>
         </specs>
-
+        
+        <specs key="posts_alt1_listed_author_levels" required_modules="posts">
+            <title>Limitar a los siguientes niveles de autor</title>
+            <description><![CDATA[
+                Si deseas que sólo ciertos niveles de usuario de los autores de las
+                entradas sean mostrados, especifica los niveles separados por comas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_alt1_excluded_author_levels" required_modules="posts">
+            <title>Excluir los siguientes niveles de autor</title>
+            <description><![CDATA[
+                Si quieres que las entradas de ciertos niveles de autor no se muestren,
+                especifica aquí los niveles separados por comas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
         <specs key="posts_alt1_hide_category_selector" required_modules="posts">
             <title>¿Ocultar selector de categorías?</title>
             <description><![CDATA[
-                    De forma predeterminada, se mostrará un selector de categoría
-                    <b>si hay más de una categoría</b> enlistada.
-                    Puedes desactivarlo usando esta opción.
-                ]]></description>
+                De forma predeterminada, se mostrará un selector de categoría
+                <b>si hay más de una categoría</b> enlistada.
+                Puedes desactivarlo usando esta opción.
+            ]]></description>
             <type>yes/no</type>
         </specs>
-
+        
         <specs key="posts_alt1_hide_search_helper" required_modules="posts">
             <title>¿Ocultar buscador?</title>
             <description><![CDATA[
-                    De forma predeterminada, se mostrará un control para buscar
-                    en todas las entradas incluídas.
-                    Puedes desactivarlo usando esta opción.
-                ]]></description>
+                De forma predeterminada, se mostrará un control para buscar
+                en todas las entradas incluídas.
+                Puedes desactivarlo usando esta opción.
+            ]]></description>
             <type>yes/no</type>
         </specs>
-
+        
         <specs key="posts_alt1_standard_icon" required_modules="posts">
             <title>Icono estándar del servicio</title>
             <description><![CDATA[
-                    La plataforma móvil usa iconos distiontos para iOS y Android.
-                    Para iOS, se usa el set de Framework7 y para Android se usa Font Awesome.
-                    Aquí debes especificar ambos separados por una coma, p.e.:<br><br>
-                    
-                    <code>folder,fa-folder-o</code><br><br>
-                    
-                    <i class="fa fa-warning"></i> <b>Importante:</b>
-                    Asegúrate de especificar la llave del ícono correcta en ambos casos, de lo contrario,
-                    tu sitio web puede recibir críticas negativas por falta de homogeneidad entre plataformas.<br>
-                    <b>No uses los iconos de "home".</b> Esos resérvalos para el índice principal.
-                    
-                    <ul>
-                        <li><a href="http://framework7.io/icons/" target="_blank">Ver referencia de Framework7</a></li>
-                        <li><a href="http://fontawesome.io/icons/" target="_blank">Ver referencia de Font Awesome</a></li>
-                    </ul>
-                    <i class="fa fa-info-circle"></i>
-                    Si deseas usar una imagen, deja este valor vacío y usa el selector debajo.
-                ]]></description>
+                La plataforma móvil usa iconos distiontos para iOS y Android.
+                Para iOS, se usa el set de Framework7 y para Android se usa Font Awesome.
+                Aquí debes especificar ambos separados por una coma, p.e.:<br><br>
+                
+                <code>home,fa-home</code><br><br>
+                
+                <i class="fa fa-warning"></i> <b>Importante:</b>
+                Asegúrate de especificar la llave del ícono correcta en ambos casos, de lo contrario,
+                tu sitio web puede recibir críticas negativas por falta de homogeneidad entre plataformas.
+                
+                <ul>
+                    <li><a href="http://framework7.io/icons/" target="_blank">Ver referencia de Framework7</a></li>
+                    <li><a href="http://fontawesome.io/icons/" target="_blank">Ver referencia de Font Awesome</a></li>
+                </ul>
+                <i class="fa fa-info-circle"></i>
+                Si deseas usar una imagen, deja este valor vacío y usa el selector debajo.
+            ]]></description>
             <type>text</type>
         </specs>
-
+        
         <specs key="posts_alt1_image_icon" required_modules="posts">
             <title>Icono gráfico del servicio</title>
             <description><![CDATA[
-                    Puedes usar una imagen en lugar del icono estándar para el servicio
-                    usando este selector.<br>
-                    <i class="fa fa-info-circle"></i>
-                    Usa de preferencia un archivo PNG de al menos <code>256x256</code> pixeles.
-                    <b>No uses imágenes rectangulares.</b>
-                ]]></description>
+                Puedes usar una imagen en lugar del icono estándar para el servicio
+                usando este selector.<br>
+                <i class="fa fa-info-circle"></i>
+                Usa de preferencia un archivo PNG de al menos <code>256x256</code> pixeles.
+                <b>No uses imágenes rectangulares.</b>
+            ]]></description>
             <type>@gallery:specs_renderer/image_selector</type>
             <options>
                 <image_size>full</image_size>
             </options>
         </specs>
-
+        
         <!-- ==================================================== -->
         <specs is_separator="true" required_modules="posts"><![CDATA[
                 Servicios: Entradas / índice alternativo 2
                 <i>Úsalo sólo si deseas presentar más de un índice de entradas</i>
             ]]></specs>
         <!-- ============================================================= -->
-
+        
         <specs key="posts_alt2_style" required_modules="posts">
             <title>Estilo de despliegue</title>
             <description><![CDATA[
-                    Elige el estilo de despliegue de las entradas:
-                    <ul>
-                        <li>
-                            <b>Muro de tarjetas:</b>
-                            Despliegue similar a Facebook, dando énfasis a las imágenes
-                            destacadas de las entradas.
-                        </li>
-                        <li>
-                            <b>Listado de medios:</b>
-                            Despliegue similar a Twitter, poniendo el avatar del
-                            autor a la izquierda y los datos a la derecha.
-                        </li>
-                    </ul>
-                ]]></description>
+                Elige el estilo de despliegue de las entradas:
+                <ul>
+                    <li>
+                        <b>Muro simple de tarjetas:</b>
+                        Muestra sólo texto, dividiendo los detalles en secciones.
+                    </li>
+                    <li>
+                        <b>Muro de tarjetas "moderno":</b>
+                        Muestra el título en texto blanco con sombra
+                        <b>dentro</b> de la imagen destacada.
+                    </li>
+                    <li>
+                        <b>Muro de tarjetas estilo Facebook:</b>
+                        Dividido en tres secciones:
+                        Datos del autor y fecha de publicación en el encabezado,
+                        Título, imagen destacada y extracto en otra sección
+                        y una sección extra con los datos adicionales (comentarios, etc.)
+                    </li>
+                    <li>
+                        <b>Listado de medios:</b>
+                        Despliegue similar a Twitter, poniendo el avatar del
+                        autor a la izquierda y los datos a la derecha.
+                    </li>
+                </ul>
+            ]]></description>
             <type>list</type>
             <options>
-                <option value="feed/cards">Muro de tarjetas</option>
-                <option value="feed/media_list">Listado de medios</option>
+                <option value="feed/cards:simple"  >Muro simple de tarjetas</option>
+                <option value="feed/cards:modern"  >Muro de tarjetas "moderno"</option>
+                <option value="feed/cards:facebook">Muro de tarjetas estilo Facebook</option>
+                <option value="feed/media_list"    >Listado de medios</option>
             </options>
         </specs>
-
+        
         <specs key="posts_alt2_batch_size" required_modules="posts">
             <title>Cantidad de entradas por lote</title>
             <description><![CDATA[
-                    Especifica la cantidad de entradas a descargar por lote.<br>
-                    Valor predeterminado: <code>10</code>.
-                ]]></description>
+                Especifica la cantidad de entradas a descargar por lote.<br>
+                Valor predeterminado: <code>10</code>.
+            ]]></description>
             <type>number</type>
         </specs>
-
+        
         <specs key="posts_alt2_comments_in_index" required_modules="posts">
             <title>Incluír comentarios</title>
             <description><![CDATA[
-                    Activa esta opción para incluír los comentarios en el índice.<br>
-                    <i class="fa fa-info-circle"></i> Nota:
-                    Esta opción se ignorará si el sistema de comentarios está
-                    inactivo o sobreescrito por un módulo de fuente externa,
-                    como lo son los comentarios de Facebook.
-                ]]></description>
+                Activa esta opción para incluír los comentarios en el índice.<br>
+                <i class="fa fa-info-circle"></i> Nota:
+                Esta opción se ignorará si el sistema de comentarios está
+                inactivo o sobreescrito por un módulo de fuente externa,
+                como lo son los comentarios de Facebook.
+            ]]></description>
             <type>boolean</type>
         </specs>
-
+        
         <specs key="posts_alt2_listed_categories" required_modules="posts">
             <title>Categorías a incluír</title>
             <description><![CDATA[
-                    Lista de slugs de categorías a mostrar en este índice.
-                    De no especificarse, se incluirán todas.
-                ]]></description>
+                Lista de slugs de categorías a mostrar en este índice.
+                De no especificarse, se incluirán todas.
+            ]]></description>
             <type>code</type>
         </specs>
-
-        <specs key="posts_alt2_hashtags_only" required_modules="posts">
+        
+        <specs key="posts_alt2_excluded_categories" required_modules="posts">
+            <title>Categorías a excluír</title>
+            <description><![CDATA[
+                Lista de slugs de categorías que no deseas mostrar en este índice.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt2_listed_hashtags" required_modules="posts">
             <title>Limitar a las siguientes etiquetas</title>
             <description><![CDATA[
-                    Si deseas que sólo se muestren entradas que contengan ciertas
-                    etiquetas (hashtags), especificalas aquí, una por línea.
-                    Las entradas que tengan al menos una de las etiquetas de la lista
-                    serán incluídas.
-                ]]></description>
+                Si deseas que sólo se muestren entradas que contengan ciertas
+                etiquetas (hashtags), especificalas aquí, una por línea.
+                Las entradas que tengan al menos una de las etiquetas de la lista
+                serán incluídas.
+            ]]></description>
             <type>code</type>
         </specs>
-
-        <specs key="posts_alt2_author_levels_filter" required_modules="posts">
-            <title>Limitar a los siguientes niveles de autor</title>
+        
+        <specs key="posts_alt2_excluded_hashtags" required_modules="posts">
+            <title>Excluír entradas con las siguientes etiquetas</title>
             <description><![CDATA[
-                    Si deseas que sólo ciertos niveles de usuario de los autores de las
-                    entradas sean mostrados, especifica los niveles separados por comas.
-                ]]></description>
-            <type>text</type>
+                Si deseas que no se muestren entradas que contengan ciertas
+                etiquetas (hashtags), especificalas aquí, una por línea.
+                Las entradas que tengan al menos una de las etiquetas de la lista
+                serán incluídas.
+            ]]></description>
+            <type>code</type>
         </specs>
-
+        
         <specs key="posts_alt2_show_authors" required_modules="posts">
             <title>Mostrar autores</title>
             <description><![CDATA[
-                    Si tu sitio web es multi autor y deseas que en los índices y
-                    entradas individuales se acredite la autoría, habilita esta opción.
-                ]]></description>
+                Si tu sitio web es multi autor y deseas que en los índices y
+                entradas individuales se acredite la autoría, habilita esta opción.
+            ]]></description>
             <type>boolean</type>
         </specs>
-
+        
+        <specs key="posts_alt2_listed_author_levels" required_modules="posts">
+            <title>Limitar a los siguientes niveles de autor</title>
+            <description><![CDATA[
+                Si deseas que sólo ciertos niveles de usuario de los autores de las
+                entradas sean mostrados, especifica los niveles separados por comas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_alt2_excluded_author_levels" required_modules="posts">
+            <title>Excluir los siguientes niveles de autor</title>
+            <description><![CDATA[
+                Si quieres que las entradas de ciertos niveles de autor no se muestren,
+                especifica aquí los niveles separados por comas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
         <specs key="posts_alt2_hide_category_selector" required_modules="posts">
             <title>¿Ocultar selector de categorías?</title>
             <description><![CDATA[
-                    De forma predeterminada, se mostrará un selector de categoría
-                    <b>si hay más de una categoría</b> enlistada.
-                    Puedes desactivarlo usando esta opción.
-                ]]></description>
+                De forma predeterminada, se mostrará un selector de categoría
+                <b>si hay más de una categoría</b> enlistada.
+                Puedes desactivarlo usando esta opción.
+            ]]></description>
             <type>yes/no</type>
         </specs>
-
+        
         <specs key="posts_alt2_hide_search_helper" required_modules="posts">
             <title>¿Ocultar buscador?</title>
             <description><![CDATA[
-                    De forma predeterminada, se mostrará un control para buscar
-                    en todas las entradas incluídas.
-                    Puedes desactivarlo usando esta opción.
-                ]]></description>
+                De forma predeterminada, se mostrará un control para buscar
+                en todas las entradas incluídas.
+                Puedes desactivarlo usando esta opción.
+            ]]></description>
             <type>yes/no</type>
         </specs>
-
+        
         <specs key="posts_alt2_standard_icon" required_modules="posts">
             <title>Icono estándar del servicio</title>
             <description><![CDATA[
-                    La plataforma móvil usa iconos distiontos para iOS y Android.
-                    Para iOS, se usa el set de Framework7 y para Android se usa Font Awesome.
-                    Aquí debes especificar ambos separados por una coma, p.e.:<br><br>
-                    
-                    <code>folder,fa-folder-o</code><br><br>
-                    
-                    <i class="fa fa-warning"></i> <b>Importante:</b>
-                    Asegúrate de especificar la llave del ícono correcta en ambos casos, de lo contrario,
-                    tu sitio web puede recibir críticas negativas por falta de homogeneidad entre plataformas.<br>
-                    <b>No uses los iconos de "home".</b> Esos resérvalos para el índice principal.
-                    
-                    <ul>
-                        <li><a href="http://framework7.io/icons/" target="_blank">Ver referencia de Framework7</a></li>
-                        <li><a href="http://fontawesome.io/icons/" target="_blank">Ver referencia de Font Awesome</a></li>
-                    </ul>
-                    <i class="fa fa-info-circle"></i>
-                    Si deseas usar una imagen, deja este valor vacío y usa el selector debajo.
-                ]]></description>
+                La plataforma móvil usa iconos distiontos para iOS y Android.
+                Para iOS, se usa el set de Framework7 y para Android se usa Font Awesome.
+                Aquí debes especificar ambos separados por una coma, p.e.:<br><br>
+                
+                <code>home,fa-home</code><br><br>
+                
+                <i class="fa fa-warning"></i> <b>Importante:</b>
+                Asegúrate de especificar la llave del ícono correcta en ambos casos, de lo contrario,
+                tu sitio web puede recibir críticas negativas por falta de homogeneidad entre plataformas.
+                
+                <ul>
+                    <li><a href="http://framework7.io/icons/" target="_blank">Ver referencia de Framework7</a></li>
+                    <li><a href="http://fontawesome.io/icons/" target="_blank">Ver referencia de Font Awesome</a></li>
+                </ul>
+                <i class="fa fa-info-circle"></i>
+                Si deseas usar una imagen, deja este valor vacío y usa el selector debajo.
+            ]]></description>
             <type>text</type>
         </specs>
-
+        
         <specs key="posts_alt2_image_icon" required_modules="posts">
             <title>Icono gráfico del servicio</title>
             <description><![CDATA[
-                    Puedes usar una imagen en lugar del icono estándar para el servicio
-                    usando este selector.<br>
-                    <i class="fa fa-info-circle"></i>
-                    Usa de preferencia un archivo PNG de al menos <code>256x256</code> pixeles.
-                    <b>No uses imágenes rectangulares.</b>
-                ]]></description>
+                Puedes usar una imagen en lugar del icono estándar para el servicio
+                usando este selector.<br>
+                <i class="fa fa-info-circle"></i>
+                Usa de preferencia un archivo PNG de al menos <code>256x256</code> pixeles.
+                <b>No uses imágenes rectangulares.</b>
+            ]]></description>
             <type>@gallery:specs_renderer/image_selector</type>
             <options>
                 <image_size>full</image_size>
             </options>
         </specs>
-
+        
         <!-- ==================================================== -->
         <specs is_separator="true" required_modules="posts"><![CDATA[
                 Servicios: Entradas / índice alternativo 3
                 <i>Úsalo sólo si deseas presentar más de un índice de entradas</i>
             ]]></specs>
         <!-- ============================================================= -->
-
+        
         <specs key="posts_alt3_style" required_modules="posts">
             <title>Estilo de despliegue</title>
             <description><![CDATA[
-                    Elige el estilo de despliegue de las entradas:
-                    <ul>
-                        <li>
-                            <b>Muro de tarjetas:</b>
-                            Despliegue similar a Facebook, dando énfasis a las imágenes
-                            destacadas de las entradas.
-                        </li>
-                        <li>
-                            <b>Listado de medios:</b>
-                            Despliegue similar a Twitter, poniendo el avatar del
-                            autor a la izquierda y los datos a la derecha.
-                        </li>
-                    </ul>
-                ]]></description>
+                Elige el estilo de despliegue de las entradas:
+                <ul>
+                    <li>
+                        <b>Muro simple de tarjetas:</b>
+                        Muestra sólo texto, dividiendo los detalles en secciones.
+                    </li>
+                    <li>
+                        <b>Muro de tarjetas "moderno":</b>
+                        Muestra el título en texto blanco con sombra
+                        <b>dentro</b> de la imagen destacada.
+                    </li>
+                    <li>
+                        <b>Muro de tarjetas estilo Facebook:</b>
+                        Dividido en tres secciones:
+                        Datos del autor y fecha de publicación en el encabezado,
+                        Título, imagen destacada y extracto en otra sección
+                        y una sección extra con los datos adicionales (comentarios, etc.)
+                    </li>
+                    <li>
+                        <b>Listado de medios:</b>
+                        Despliegue similar a Twitter, poniendo el avatar del
+                        autor a la izquierda y los datos a la derecha.
+                    </li>
+                </ul>
+            ]]></description>
             <type>list</type>
             <options>
-                <option value="feed/cards">Muro de tarjetas</option>
-                <option value="feed/media_list">Listado de medios</option>
+                <option value="feed/cards:simple"  >Muro simple de tarjetas</option>
+                <option value="feed/cards:modern"  >Muro de tarjetas "moderno"</option>
+                <option value="feed/cards:facebook">Muro de tarjetas estilo Facebook</option>
+                <option value="feed/media_list"    >Listado de medios</option>
             </options>
         </specs>
-
+        
         <specs key="posts_alt3_batch_size" required_modules="posts">
             <title>Cantidad de entradas por lote</title>
             <description><![CDATA[
-                    Especifica la cantidad de entradas a descargar por lote.<br>
-                    Valor predeterminado: <code>10</code>.
-                ]]></description>
+                Especifica la cantidad de entradas a descargar por lote.<br>
+                Valor predeterminado: <code>10</code>.
+            ]]></description>
             <type>number</type>
         </specs>
-
+        
         <specs key="posts_alt3_comments_in_index" required_modules="posts">
             <title>Incluír comentarios</title>
             <description><![CDATA[
-                    Activa esta opción para incluír los comentarios en el índice.<br>
-                    <i class="fa fa-info-circle"></i> Nota:
-                    Esta opción se ignorará si el sistema de comentarios está
-                    inactivo o sobreescrito por un módulo de fuente externa,
-                    como lo son los comentarios de Facebook.
-                ]]></description>
+                Activa esta opción para incluír los comentarios en el índice.<br>
+                <i class="fa fa-info-circle"></i> Nota:
+                Esta opción se ignorará si el sistema de comentarios está
+                inactivo o sobreescrito por un módulo de fuente externa,
+                como lo son los comentarios de Facebook.
+            ]]></description>
             <type>boolean</type>
         </specs>
-
+        
         <specs key="posts_alt3_listed_categories" required_modules="posts">
             <title>Categorías a incluír</title>
             <description><![CDATA[
-                    Lista de slugs de categorías a mostrar en este índice.
-                    De no especificarse, se incluirán todas.
-                ]]></description>
+                Lista de slugs de categorías a mostrar en este índice.
+                De no especificarse, se incluirán todas.
+            ]]></description>
             <type>code</type>
         </specs>
-
-        <specs key="posts_alt3_hashtags_only" required_modules="posts">
+        
+        <specs key="posts_alt3_excluded_categories" required_modules="posts">
+            <title>Categorías a excluír</title>
+            <description><![CDATA[
+                Lista de slugs de categorías que no deseas mostrar en este índice.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt3_listed_hashtags" required_modules="posts">
             <title>Limitar a las siguientes etiquetas</title>
             <description><![CDATA[
-                    Si deseas que sólo se muestren entradas que contengan ciertas
-                    etiquetas (hashtags), especificalas aquí, una por línea.
-                    Las entradas que tengan al menos una de las etiquetas de la lista
-                    serán incluídas.
-                ]]></description>
+                Si deseas que sólo se muestren entradas que contengan ciertas
+                etiquetas (hashtags), especificalas aquí, una por línea.
+                Las entradas que tengan al menos una de las etiquetas de la lista
+                serán incluídas.
+            ]]></description>
             <type>code</type>
         </specs>
-
-        <specs key="posts_alt3_author_levels_filter" required_modules="posts">
-            <title>Limitar a los siguientes niveles de autor</title>
+        
+        <specs key="posts_alt3_excluded_hashtags" required_modules="posts">
+            <title>Excluír entradas con las siguientes etiquetas</title>
             <description><![CDATA[
-                    Si deseas que sólo ciertos niveles de usuario de los autores de las
-                    entradas sean mostrados, especifica los niveles separados por comas.
-                ]]></description>
-            <type>text</type>
+                Si deseas que no se muestren entradas que contengan ciertas
+                etiquetas (hashtags), especificalas aquí, una por línea.
+                Las entradas que tengan al menos una de las etiquetas de la lista
+                serán incluídas.
+            ]]></description>
+            <type>code</type>
         </specs>
-
+        
         <specs key="posts_alt3_show_authors" required_modules="posts">
             <title>Mostrar autores</title>
             <description><![CDATA[
-                    Si tu sitio web es multi autor y deseas que en los índices y
-                    entradas individuales se acredite la autoría, habilita esta opción.
-                ]]></description>
+                Si tu sitio web es multi autor y deseas que en los índices y
+                entradas individuales se acredite la autoría, habilita esta opción.
+            ]]></description>
             <type>boolean</type>
         </specs>
-
+        
+        <specs key="posts_alt3_listed_author_levels" required_modules="posts">
+            <title>Limitar a los siguientes niveles de autor</title>
+            <description><![CDATA[
+                Si deseas que sólo ciertos niveles de usuario de los autores de las
+                entradas sean mostrados, especifica los niveles separados por comas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_alt3_excluded_author_levels" required_modules="posts">
+            <title>Excluir los siguientes niveles de autor</title>
+            <description><![CDATA[
+                Si quieres que las entradas de ciertos niveles de autor no se muestren,
+                especifica aquí los niveles separados por comas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
         <specs key="posts_alt3_hide_category_selector" required_modules="posts">
             <title>¿Ocultar selector de categorías?</title>
             <description><![CDATA[
-                    De forma predeterminada, se mostrará un selector de categoría
-                    <b>si hay más de una categoría</b> enlistada.
-                    Puedes desactivarlo usando esta opción.
-                ]]></description>
+                De forma predeterminada, se mostrará un selector de categoría
+                <b>si hay más de una categoría</b> enlistada.
+                Puedes desactivarlo usando esta opción.
+            ]]></description>
             <type>yes/no</type>
         </specs>
-
+        
         <specs key="posts_alt3_hide_search_helper" required_modules="posts">
             <title>¿Ocultar buscador?</title>
             <description><![CDATA[
-                    De forma predeterminada, se mostrará un control para buscar
-                    en todas las entradas incluídas.
-                    Puedes desactivarlo usando esta opción.
-                ]]></description>
+                De forma predeterminada, se mostrará un control para buscar
+                en todas las entradas incluídas.
+                Puedes desactivarlo usando esta opción.
+            ]]></description>
             <type>yes/no</type>
         </specs>
-
+        
         <specs key="posts_alt3_standard_icon" required_modules="posts">
             <title>Icono estándar del servicio</title>
             <description><![CDATA[
-                    La plataforma móvil usa iconos distiontos para iOS y Android.
-                    Para iOS, se usa el set de Framework7 y para Android se usa Font Awesome.
-                    Aquí debes especificar ambos separados por una coma, p.e.:<br><br>
-                    
-                    <code>folder,fa-folder-o</code><br><br>
-                    
-                    <i class="fa fa-warning"></i> <b>Importante:</b>
-                    Asegúrate de especificar la llave del ícono correcta en ambos casos, de lo contrario,
-                    tu sitio web puede recibir críticas negativas por falta de homogeneidad entre plataformas.<br>
-                    <b>No uses los iconos de "home".</b> Esos resérvalos para el índice principal.
-                    
-                    <ul>
-                        <li><a href="http://framework7.io/icons/" target="_blank">Ver referencia de Framework7</a></li>
-                        <li><a href="http://fontawesome.io/icons/" target="_blank">Ver referencia de Font Awesome</a></li>
-                    </ul>
-                    <i class="fa fa-info-circle"></i>
-                    Si deseas usar una imagen, deja este valor vacío y usa el selector debajo.
-                ]]></description>
+                La plataforma móvil usa iconos distiontos para iOS y Android.
+                Para iOS, se usa el set de Framework7 y para Android se usa Font Awesome.
+                Aquí debes especificar ambos separados por una coma, p.e.:<br><br>
+                
+                <code>home,fa-home</code><br><br>
+                
+                <i class="fa fa-warning"></i> <b>Importante:</b>
+                Asegúrate de especificar la llave del ícono correcta en ambos casos, de lo contrario,
+                tu sitio web puede recibir críticas negativas por falta de homogeneidad entre plataformas.
+                
+                <ul>
+                    <li><a href="http://framework7.io/icons/" target="_blank">Ver referencia de Framework7</a></li>
+                    <li><a href="http://fontawesome.io/icons/" target="_blank">Ver referencia de Font Awesome</a></li>
+                </ul>
+                <i class="fa fa-info-circle"></i>
+                Si deseas usar una imagen, deja este valor vacío y usa el selector debajo.
+            ]]></description>
             <type>text</type>
         </specs>
-
+        
         <specs key="posts_alt3_image_icon" required_modules="posts">
             <title>Icono gráfico del servicio</title>
             <description><![CDATA[
-                    Puedes usar una imagen en lugar del icono estándar para el servicio
-                    usando este selector.<br>
-                    <i class="fa fa-info-circle"></i>
-                    Usa de preferencia un archivo PNG de al menos <code>256x256</code> pixeles.
-                    <b>No uses imágenes rectangulares.</b>
-                ]]></description>
+                Puedes usar una imagen en lugar del icono estándar para el servicio
+                usando este selector.<br>
+                <i class="fa fa-info-circle"></i>
+                Usa de preferencia un archivo PNG de al menos <code>256x256</code> pixeles.
+                <b>No uses imágenes rectangulares.</b>
+            ]]></description>
             <type>@gallery:specs_renderer/image_selector</type>
             <options>
                 <image_size>full</image_size>
