@@ -44,6 +44,7 @@ class toolbox extends base_toolbox
                           (visibility = 'level_based' and '{$account->level}' >= min_level) 
                         )";
         
+        # Included categories
         $raw_list = $settings->get("modules:mobile_controller.{$scope}_listed_categories");
         if( ! empty($raw_list) )
         {
@@ -52,6 +53,17 @@ class toolbox extends base_toolbox
                 $slugs[] = "'" . trim($line) . "'";
             
             $where[] = "slug in (" .implode(", ", $slugs) . ")";
+        }
+        
+        # Excluded categories
+        $raw_list = $settings->get("modules:mobile_controller.{$scope}_excluded_categories");
+        if( ! empty($raw_list) )
+        {
+            $slugs = array();
+            foreach(explode("\n", $raw_list) as $line)
+                $slugs[] = "'" . trim($line) . "'";
+    
+            $where[] = "slug not in (" .implode(", ", $slugs) . ")";
         }
         
         return $where;

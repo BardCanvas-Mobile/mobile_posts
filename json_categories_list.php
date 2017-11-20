@@ -53,6 +53,8 @@ foreach($data as $item) $final_data[] = (object) array(
 $toolbox->throw_response(array(
     "message" => "OK",
     "data"    => $final_data,
-    "request" => $_REQUEST,
-    "get"     => $_GET,
+    "stats"   => (object) array(
+        "processingTime" => number_format(microtime(true) - $global_start_time, 3) . "s",
+        "queries"        => $database->get_tracked_queries_count(),
+    ),
 ));
