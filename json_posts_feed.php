@@ -49,13 +49,20 @@ $posts_repository      = new posts_repository();
 $categories_repository = new categories_repository();
 $accounts_repository   = new accounts_repository();
 
+#
+# Filters
+#
+
 $filter = array();
+
+# By category
 if( ! empty($_REQUEST["category"]) )
 {
     $filter[] = sprintf("main_category = '%s'", addslashes(trim(stripslashes($_REQUEST["category"]))));
 }
 else
 {
+    # Included categories
     $raw_list = $settings->get("modules:mobile_controller.{$_REQUEST["scope"]}_listed_categories");
     if( ! empty($raw_list) )
     {
@@ -65,7 +72,28 @@ else
         
         $filter[] = "main_category in ( select c.id_category from categories c where c.slug in (" .implode(", ", $slugs) . ") )";
     }
+    
+    # Excluded categories
+    $raw_list = $settings->get("modules:mobile_controller.{$_REQUEST["scope"]}_excluded_categories");
+    if( ! empty($raw_list) )
+    {
+        $slugs = array();
+        foreach(explode("\n", $raw_list) as $line)
+            $slugs[] = "'" . trim($line) . "'";
+        
+        $filter[] = "main_category not in ( select c.id_category from categories c where c.slug in (" .implode(", ", $slugs) . ") )";
+    }
 }
+
+# Included ser levels
+$raw_list = $settings->get("modules:mobile_controller.{$_REQUEST["scope"]}_listed_author_levels");
+if( ! empty($raw_list) )
+    $filter[] = "( select level from account where account.id_account = posts.id_author ) in ($raw_list)";
+
+# Excluded user levels
+$raw_list = $settings->get("modules:mobile_controller.{$_REQUEST["scope"]}_excluded_author_levels");
+if( ! empty($raw_list) )
+    $filter[] = "( select level from account where account.id_account = posts.id_author ) not in ($raw_list)";
 
 #
 # Data grabbing
@@ -79,16 +107,17 @@ if( ! is_numeric($offset) ) $offset = 0;
 
 $posts = $posts_repository->lookup($filter, $limit, $offset, "");
 
-$raw_categories = $categories_repository->find(array(), 0, 0, "id_category asc");
-
 /** @var category_record[] $all_categories */
 $all_categories = array();
+$raw_categories = $categories_repository->find(array(), 0, 0, "id_category asc");
 foreach($raw_categories as $category) $all_categories[$category->id_category] = $category;
 
 $all_countries = array();
 $res = $database->query("select * from countries order by alpha_2 asc");
 while($row = $database->fetch_object($res))
     $all_countries[$row->alpha_2] = $row->name;
+
+$config->globals["modules:gallery.avoid_images_autolinking"] = true;
 
 foreach($posts as &$post)
 {
@@ -105,6 +134,23 @@ foreach($posts as &$post)
     $post->title   = externalize_urls($post->get_processed_title(false));
     $post->excerpt = externalize_urls($post->get_processed_excerpt(true));
     $post->content = externalize_urls($post->get_processed_content());
+    
+    #
+    # Extra content blocks
+    #
+    
+    $post->extra_content_blocks = array();
+    
+    if( ! empty($author->signature) )
+    {
+        $post->extra_content_blocks[] = (object) array(
+            "title"    => "",
+            "class"    => "author_signature",
+            "contents" => "{$author->get_processed_signature()}"
+        );
+    }
+    
+    $current_module->load_extensions("json_posts_feed", "extra_content_blocks_for_post");
 }
 
 $toolbox->throw_response(array(
