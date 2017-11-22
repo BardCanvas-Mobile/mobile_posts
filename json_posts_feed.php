@@ -12,12 +12,17 @@
  * @param int    "offset"           pagination 
  * @param string "callback"         Optional, for AJAX call
  * 
+ * @var module $current_module
+ * 
  * @returns string JSON {message:string, data:mixed}
  */
 
 use hng2_base\accounts_repository;
+use hng2_base\module;
 use hng2_modules\categories\categories_repository;
 use hng2_modules\categories\category_record;
+use hng2_modules\mobile_controller\feed_item;
+use hng2_modules\mobile_controller\feed_item_extra_content_block;
 use hng2_modules\mobile_posts\toolbox;
 use hng2_modules\posts\posts_repository;
 
@@ -119,43 +124,63 @@ while($row = $database->fetch_object($res))
 
 $config->globals["modules:gallery.avoid_images_autolinking"] = true;
 
+$items = array();
 foreach($posts as &$post)
 {
-    $author                          = $post->get_author();
-    $post->author_avatar             = $author->get_avatar_url(true);
-    $post->author_country_name       = $all_countries[$author->country];
-    $post->author_creation_date      = $author->creation_date;
-    $post->author_can_be_disabled    = true;
-    $post->can_be_deleted            = true;
-    $post->can_be_drafted            = true;
-    $post->can_be_flagged_for_review = true;
-    $post->parent_category_title     = $all_categories[$post->main_category]->parent_category_title;
+    $author = $post->get_author();
     
-    $post->title   = externalize_urls($post->get_processed_title(false));
-    $post->excerpt = externalize_urls($post->get_processed_excerpt(true));
-    $post->content = externalize_urls($post->get_processed_content());
+    $item = new feed_item();
+    
+    $item->type                 = "post";
+    $item->id                   = $post->id_post;
+    $item->author_user_name     = $author->user_name;
+    $item->author_level         = $author->level;
+    $item->author_avatar        = $author->get_avatar_url(true);
+    $item->author_display_name  = externalize_urls($author->get_processed_display_name());
+    $item->author_creation_date = $author->creation_date;
+    $item->author_country_name  = $all_countries[$author->country];
+    
+    $item->featured_image_path      = $post->featured_image_path;
+    $item->featured_image_thumbnail = $post->featured_image_thumbnail;
+    
+    $item->main_category_title   = $post->main_category_title;
+    $item->parent_category_title = $all_categories[$post->main_category]->parent_category_title;
+    
+    $item->title   = externalize_urls($post->get_processed_title(false));
+    $item->excerpt = externalize_urls($post->get_processed_excerpt(true));
+    $item->publishing_date = $post->publishing_date;
+    
+    $item->content           = externalize_urls($post->get_processed_content());
+    $item->comments_count    = $post->comments_count;
+    $item->creation_ip       = $post->creation_ip;
+    $item->creation_location = $post->creation_location;
+    
+    $item->author_can_be_disabled    = true;
+    $item->can_be_deleted            = true;
+    $item->can_be_drafted            = true;
+    $item->can_be_flagged_for_review = true;
     
     #
     # Extra content blocks
     #
     
-    $post->extra_content_blocks = array();
-    
     if( ! empty($author->signature) )
     {
-        $post->extra_content_blocks[] = (object) array(
+        $item->extra_content_blocks[] = new feed_item_extra_content_block(array(
             "title"    => "",
             "class"    => "author_signature",
             "contents" => "{$author->get_processed_signature()}"
-        );
+        ));
     }
     
-    $current_module->load_extensions("json_posts_feed", "extra_content_blocks_for_post");
+    $current_module->load_extensions("json_posts_feed", "extra_content_blocks_for_item");
+    
+    $items[] = $item;
 }
 
 $toolbox->throw_response(array(
     "message" => "OK",
-    "data"    => $posts,
+    "data"    => $items,
     "extras"  => (object) array(
         "hideCategoryInCards" => ! empty($_REQUEST["category"]),
     ),
