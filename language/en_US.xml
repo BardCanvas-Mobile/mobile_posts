@@ -28,4 +28,18 @@
     
     <all_categories>Todas las categorías</all_categories>
     
+    <actions>
+        <disable_author>Disable author</disable_author>
+        <trash>To trash</trash>
+        <draft>To draft</draft>
+        <review>For review</review>
+    </actions>
+    
+    <about_author>About {$author_display_name}</about_author>
+    
+    <!-- Todo: traducir esto!!! -->
+    <exported_settings_data for="mobile_controller">
+        
+    </exported_settings_data>
+    
 </language>

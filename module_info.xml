@@ -12,7 +12,8 @@
     </working_flags>
     
     <extension_areas_info><![CDATA[
-        JSON Posts feed: Extra content blocks for item
+        JSON Posts feed: Extra content blocks for item.
+        JSON Posts feed: Comments forging.
     ]]></extension_areas_info>
     
     <extends_to>

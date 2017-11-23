@@ -21,8 +21,9 @@ use hng2_base\accounts_repository;
 use hng2_base\module;
 use hng2_modules\categories\categories_repository;
 use hng2_modules\categories\category_record;
+use hng2_modules\mobile_controller\action;
 use hng2_modules\mobile_controller\feed_item;
-use hng2_modules\mobile_controller\feed_item_extra_content_block;
+use hng2_modules\mobile_controller\content_block;
 use hng2_modules\mobile_posts\toolbox;
 use hng2_modules\posts\posts_repository;
 
@@ -43,6 +44,40 @@ if( empty($_REQUEST["scope"]) )
 
 if( ! in_array($_REQUEST["scope"], array("posts_main", "posts_alt1", "posts_alt2", "posts_alt3")) )
     $toolbox->throw_response(trim($current_module->language->messages->invalid_scope));
+
+#
+# Cache stuff
+#
+
+$cache_ttl = $settings->get("modules:posts.main_index_cache_for_guests") * 60;
+$cache_key = sprintf(
+    "%s/%s/%s~v1",
+    $_REQUEST["scope"],
+    empty($_REQUEST["category"]) ? "all" : "cat:{$_REQUEST["category"]}",
+    empty($_REQUEST["offset"]) ? 0 : $_REQUEST["offset"]
+);
+
+if( ! $account->_exists )
+{
+    $items = $mem_cache->get($cache_key);
+    
+    if( ! empty($items) )
+    {
+        $toolbox->throw_response(array(
+            "message" => "OK",
+            "data"    => $items,
+            "extras"  => (object) array(
+                "hideCategoryInCards" => ! empty($_REQUEST["category"]),
+            ),
+            "request" => $_REQUEST,
+            "stats"   => (object) array(
+                "processingTime" => number_format(microtime(true) - $global_start_time, 3) . "s",
+                "queries"        => $database->get_tracked_queries_count(),
+                "cachedResults"  => true,
+            ),
+        ));
+    }
+}
 
 #
 # Inits
@@ -140,8 +175,12 @@ foreach($posts as &$post)
     $item->author_creation_date = $author->creation_date;
     $item->author_country_name  = $all_countries[$author->country];
     
+    $item->featured_image_id        = $post->id_featured_image;
     $item->featured_image_path      = $post->featured_image_path;
     $item->featured_image_thumbnail = $post->featured_image_thumbnail;
+    
+    $item->has_featured_image             = ! empty($post->id_featured_image);
+    $item->featured_image_not_in_contents = stristr($post->content, $post->id_featured_image) === false;
     
     $item->main_category_title   = $post->main_category_title;
     $item->parent_category_title = $all_categories[$post->main_category]->parent_category_title;
@@ -151,14 +190,8 @@ foreach($posts as &$post)
     $item->publishing_date = $post->publishing_date;
     
     $item->content           = externalize_urls($post->get_processed_content());
-    $item->comments_count    = $post->comments_count;
     $item->creation_ip       = $post->creation_ip;
     $item->creation_location = $post->creation_location;
-    
-    $item->author_can_be_disabled    = true;
-    $item->can_be_deleted            = true;
-    $item->can_be_drafted            = true;
-    $item->can_be_flagged_for_review = true;
     
     #
     # Extra content blocks
@@ -166,17 +199,120 @@ foreach($posts as &$post)
     
     if( ! empty($author->signature) )
     {
-        $item->extra_content_blocks[] = new feed_item_extra_content_block(array(
-            "title"    => "",
+        $item->extra_content_blocks[] = new content_block(array(
             "class"    => "author_signature",
             "contents" => "{$author->get_processed_signature()}"
         ));
     }
     
+    # Excerpt additions
+    if( $account->level >= $config::MODERATOR_USER_LEVEL )
+    {
+        $extra_details = array();
+        
+        $extra_details[] = "
+            <div class='fa-bulleted'>
+                <i class='fa fa-user fa-fw'></i>
+                {$modules["accounts"]->language->user_profile_page->info->level}
+                {$author->level} ({$author->get_role()})
+            </div>
+            <div class='fa-bulleted'>
+                <i class='fa fa-clock-o fa-fw'></i>
+                {$modules["accounts"]->language->user_profile_page->info->member_since}
+                <span class='convert-to-full-date'>{$author->creation_date}</span>
+            </div>
+        ";
+        
+        $extra_details[] = "
+            <div class='fa-bulleted'>
+                <i class='fa fa-globe fa-fw'></i>
+                {$post->creation_ip}
+            </div>
+        ";
+    
+        if( ! empty($post->creation_location) )
+            $extra_details[] = "
+                <div class='fa-bulleted'>
+                    <i class='fa fa-map-marker fa-fw'></i>
+                    {$post->creation_location}
+                </div>
+            ";
+        
+        if( ! empty($extra_details) )
+        {
+            $item->excerpt_extra_blocks[] = new content_block(array(
+                "title"    => "",
+                "class"    => "color-gray",
+                "contents" => implode("\n", $extra_details),
+            ));
+            
+            $item->extra_content_blocks[] = new content_block(array(
+                "title"    => replace_escaped_objects($current_module->language->about_author, array(
+                    '{$author_display_name}' => $author->get_processed_display_name()
+                )),
+                "class"    => "author_info_for_admins content-block",
+                "contents" => "<div class='content-block-inner color-gray'>" . implode("\n", $extra_details) . "</div>",
+            ));
+        }
+    }
+    
     $current_module->load_extensions("json_posts_feed", "extra_content_blocks_for_item");
+    
+    #
+    # Index actions
+    #
+    
+    if(
+        $account->level >= $config::MODERATOR_USER_LEVEL &&
+        $account->id_account != $author->id_account &&
+        $author->level < $config::MODERATOR_USER_LEVEL
+    ) {
+        # Draft
+        $item->index_actions[] = new action(array(
+            "caption" => trim($current_module->language->actions->draft),
+            "icon"    => "fa-times",
+            "class"   => "color-orange",
+        ));
+        
+        # Flag for review
+        $item->index_actions[] = new action(array(
+            "caption" => trim($current_module->language->actions->review),
+            "icon"    => "fa-flag",
+            "class"   => "color-orange",
+        ));
+        
+        # Trash
+        $item->index_actions[] = new action(array(
+            "caption" => trim($current_module->language->actions->trash),
+            "icon"    => "fa-trash",
+            "class"   => "color-red",
+        ));
+        
+        # Disable author account
+        $item->index_actions[] = new action(array(
+            "caption" => trim($current_module->language->actions->disable_author),
+            "icon"    => "fa-user-times",
+            "class"   => "color-red",
+        ));
+        
+        $item->has_index_actions = true;
+    }
+    
+    #
+    # Comments
+    #
+    
+    $item->comments_count = $post->comments_count;
+    $current_module->load_extensions("json_posts_feed", "comments_forging");
+    
+    #
+    # Collection update
+    #
     
     $items[] = $item;
 }
+
+if( ! $account->_exists ) $mem_cache->set($cache_key, $items, 0, $cache_ttl);
 
 $toolbox->throw_response(array(
     "message" => "OK",
@@ -184,8 +320,10 @@ $toolbox->throw_response(array(
     "extras"  => (object) array(
         "hideCategoryInCards" => ! empty($_REQUEST["category"]),
     ),
+    "request" => $_REQUEST,
     "stats"   => (object) array(
         "processingTime" => number_format(microtime(true) - $global_start_time, 3) . "s",
         "queries"        => $database->get_tracked_queries_count(),
+        "cachedResults"  => false,
     ),
 ));

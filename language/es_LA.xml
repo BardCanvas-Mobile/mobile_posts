@@ -28,6 +28,15 @@
     
     <all_categories>Todas las categorías</all_categories>
     
+    <actions>
+        <disable_author>Deshabilitar autor</disable_author>
+        <trash>A papelera</trash>
+        <draft>A borrador</draft>
+        <review>A revisión</review>
+    </actions>
+
+    <about_author>Acerca de {$author_display_name}</about_author>
+    
     <exported_settings_data for="mobile_controller">
         
         <!-- =========================================== -->
