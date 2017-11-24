@@ -21,7 +21,7 @@ use hng2_base\accounts_repository;
 use hng2_base\module;
 use hng2_modules\categories\categories_repository;
 use hng2_modules\categories\category_record;
-use hng2_modules\mobile_controller\action;
+use hng2_modules\mobile_controller\action_trigger;
 use hng2_modules\mobile_controller\feed_item;
 use hng2_modules\mobile_controller\content_block;
 use hng2_modules\mobile_posts\toolbox;
@@ -255,45 +255,75 @@ foreach($posts as &$post)
             ));
         }
     }
-    
     $current_module->load_extensions("json_posts_feed", "extra_content_blocks_for_item");
     
     #
     # Index actions
     #
     
-    if(
-        $account->level >= $config::MODERATOR_USER_LEVEL &&
-        $account->id_account != $author->id_account &&
-        $author->level < $config::MODERATOR_USER_LEVEL
-    ) {
+    if($account->level >= $config::MODERATOR_USER_LEVEL)
+    {
         # Draft
-        $item->index_actions[] = new action(array(
-            "caption" => trim($current_module->language->actions->draft),
-            "icon"    => "fa-times",
-            "class"   => "color-orange",
+        $item->index_action_triggers[] = new action_trigger(array(
+            "action_id" => "posts:set_as_draft",
+            "caption"   => trim($current_module->language->actions->draft),
+            "icon"      => "fa-times",
+            "class"     => "color-orange",
+            "options"   => array(
+                "remove_on_success" => true,
+            ),
+            "params"    => array(
+                "id_post" => $post->id_post,
+            ),
         ));
         
-        # Flag for review
-        $item->index_actions[] = new action(array(
-            "caption" => trim($current_module->language->actions->review),
-            "icon"    => "fa-flag",
-            "class"   => "color-orange",
-        ));
+        if( $account->id_account != $author->id_account && $author->level < $config::MODERATOR_USER_LEVEL )
+        {
+            # Flag for review
+            $item->index_action_triggers[] = new action_trigger(array(
+                "action_id" => "posts:flag_for_review",
+                "caption"   => trim($current_module->language->actions->review),
+                "icon"      => "fa-flag",
+                "class"     => "color-orange",
+                "options"   => array(
+                    "remove_on_success" => true,
+                ),
+                "params"    => array(
+                    "id_post" => $post->id_post,
+                ),
+            ));
+        }
         
         # Trash
-        $item->index_actions[] = new action(array(
-            "caption" => trim($current_module->language->actions->trash),
-            "icon"    => "fa-trash",
-            "class"   => "color-red",
+        $item->index_action_triggers[] = new action_trigger(array(
+            "action_id" => "posts:trash",
+            "caption"   => trim($current_module->language->actions->trash),
+            "icon"      => "fa-trash",
+            "class"     => "color-red",
+            "options"   => array(
+                "remove_on_success" => true,
+            ),
+            "params"    => array(
+                "id_post" => $post->id_post,
+            ),
         ));
         
-        # Disable author account
-        $item->index_actions[] = new action(array(
-            "caption" => trim($current_module->language->actions->disable_author),
-            "icon"    => "fa-user-times",
-            "class"   => "color-red",
-        ));
+        if( $author->level < $config::MODERATOR_USER_LEVEL )
+        {
+            # Disable author account
+            $item->index_action_triggers[] = new action_trigger(array(
+                "action_id" => "accounts:disable",
+                "caption"   => trim($current_module->language->actions->disable_author),
+                "icon"      => "fa-user-times",
+                "class"     => "color-red",
+                "options"   => array(
+                    "reload_feed_on_success" => true,
+                ),
+                "params"    => array(
+                    "id_post" => $post->id_post,
+                ),
+            ));
+        }
         
         $item->has_index_actions = true;
     }

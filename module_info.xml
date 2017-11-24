@@ -21,6 +21,9 @@
             <services_registry>
                 <definitions>extenders/mobile_controller/services_registry_definitions.inc</definitions>
             </services_registry>
+            <actions_registry>
+                <definitions>extenders/mobile_controller/actions_registry_definitions.inc</definitions>
+            </actions_registry>
         </mobile_controller>
     </extends_to>
     
