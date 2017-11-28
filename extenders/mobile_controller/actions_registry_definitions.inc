@@ -6,8 +6,11 @@
  * @package    BardCanvas
  * @subpackage mobile_posts
  * @author     Alejandro Caballero - lava.caballero@gmail.com
+ * 
+ * @var module[] $modules
  */
 
+use hng2_base\module;
 use hng2_modules\mobile_controller\action;
 
 global $modules, $manifest;
