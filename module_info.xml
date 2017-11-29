@@ -2,7 +2,7 @@
 <module>
     
     <version>0.0.1</version>
-    <group>modules_misc</group>
+    <group>modules_mobile</group>
     
     <working_flags>
         <install>true</install>
