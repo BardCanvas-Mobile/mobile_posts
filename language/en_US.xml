@@ -57,7 +57,7 @@
     
     <about_author>About {$author_display_name}</about_author>
     
-    <!-- Todo: traducir esto!!! -->
+    <!-- Todo: translate this!!! -->
     <exported_settings_data for="mobile_controller">
         
     </exported_settings_data>
