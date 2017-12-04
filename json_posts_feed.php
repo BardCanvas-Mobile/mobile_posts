@@ -52,34 +52,35 @@ if( ! in_array($_REQUEST["scope"], array("posts_main", "posts_alt1", "posts_alt2
 
 $cache_ttl = $settings->get("modules:posts.main_index_cache_for_guests") * 60;
 $cache_key = sprintf(
-    "%s/%s/%s-%s~v1",
+    "%s/%s/%s-%s~v5",
     $_REQUEST["scope"],
     empty($_REQUEST["category"]) ? "all" : "cat:{$_REQUEST["category"]}",
     empty($_REQUEST["since"]) ? "since:x" : "since:{$_REQUEST["since"]}",
     empty($_REQUEST["until"]) ? "until:x" : "until:{$_REQUEST["until"]}"
 );
 
-if( ! $account->_exists )
-{
-    $items = $mem_cache->get($cache_key);
-    
-    if( ! empty($items) )
-    {
-        $toolbox->throw_response(array(
-            "message" => "OK",
-            "data"    => $items,
-            "extras"  => (object) array(
-                "hideCategoryInCards" => ! empty($_REQUEST["category"]),
-            ),
-            "request" => $_REQUEST,
-            "stats"   => (object) array(
-                "processingTime" => number_format(microtime(true) - $global_start_time, 3) . "s",
-                "queries"        => $database->get_tracked_queries_count(),
-                "cachedResults"  => true,
-            ),
-        ));
-    }
-}
+// TODO: This is working fine, enable it for production.
+// if( ! $account->_exists )
+// {
+//     $items = $mem_cache->get($cache_key);
+//    
+//     if( ! empty($items) )
+//     {
+//         $toolbox->throw_response(array(
+//             "message" => "OK",
+//             "data"    => $items,
+//             "extras"  => (object) array(
+//                 "hideCategoryInCards" => ! empty($_REQUEST["category"]),
+//             ),
+//             "request" => $_REQUEST,
+//             "stats"   => (object) array(
+//                 "processingTime" => number_format(microtime(true) - $global_start_time, 3) . "s",
+//                 "queries"        => $database->get_tracked_queries_count(),
+//                 "cachedResults"  => true,
+//             ),
+//         ));
+//     }
+// }
 
 #
 # Inits
@@ -164,6 +165,8 @@ while($row = $database->fetch_object($res))
 
 $config->globals["modules:gallery.avoid_images_autolinking"] = true;
 
+$current_module->load_extensions("json_posts_feed", "before_loop_start");
+
 $items = array();
 foreach($posts as &$post)
 {
@@ -201,93 +204,6 @@ foreach($posts as &$post)
     #
     # Extra content blocks
     #
-    
-    if($account->level >= $config::MODERATOR_USER_LEVEL)
-    {
-        $item_admin_actions = array();
-        
-        # Draft
-        $item_admin_actions[] = new action_trigger(array(
-            "action_id" => "posts:set_as_draft",
-            "caption"   => trim($current_module->language->actions->draft),
-            "icon"      => "fa-times",
-            "class"     => "color-orange",
-            "options"   => array(
-                "reload_feed_on_success" => true,
-            ),
-            "params"    => array(
-                "id_post" => $post->id_post,
-            ),
-        ));
-        
-        if( $account->id_account != $author->id_account && $author->level < $config::MODERATOR_USER_LEVEL )
-        {
-            # Flag for review
-            $item_admin_actions[] = new action_trigger(array(
-                "action_id" => "posts:flag_for_review",
-                "caption"   => trim($current_module->language->actions->review),
-                "icon"      => "fa-flag",
-                "class"     => "color-orange",
-                "options"   => array(
-                    "reload_feed_on_success" => true,
-                ),
-                "params"    => array(
-                    "id_post" => $post->id_post,
-                ),
-            ));
-        }
-        
-        # Trash
-        $item_admin_actions[] = new action_trigger(array(
-            "action_id" => "posts:trash",
-            "caption"   => trim($current_module->language->actions->trash),
-            "icon"      => "fa-trash",
-            "class"     => "color-red",
-            "options"   => array(
-                "reload_feed_on_success" => true,
-            ),
-            "params"    => array(
-                "id_post" => $post->id_post,
-            ),
-        ));
-        
-        if( $author->level < $config::MODERATOR_USER_LEVEL )
-        {
-            # Disable author account
-            $item_admin_actions[] = new action_trigger(array(
-                "action_id" => "accounts:disable",
-                "caption"   => trim($current_module->language->actions->disable_author),
-                "icon"      => "fa-user-times",
-                "class"     => "color-red",
-                "options"   => array(
-                    "reload_feed_on_success" => true,
-                ),
-                "params"    => array(
-                    "id_post" => $post->id_post,
-                ),
-            ));
-        }
-        
-        if( ! empty($item_admin_actions) )
-        {
-            $contents_block = "";
-            foreach($item_admin_actions as $action)
-            {
-                $encoded_action = json_encode($action);
-                $contents_block .= "
-                    <a class='button bc-action-trigger {$action->class}' onclick='BCapp.triggerAction(this)'>
-                        <template class='bc-action-data'>{$encoded_action}</template>
-                        <i class='fa {$action->icon} fa-lg'></i> {$action->caption}
-                    </a>
-                ";
-            }
-            
-            $item->extra_content_blocks[] = new content_block(array(
-                "class"    => "content-block-inner item-actions buttons-row",
-                "contents" => "{$contents_block}"
-            ));
-        }
-    }
     
     if( ! empty($author->signature) )
     {
@@ -355,14 +271,14 @@ foreach($posts as &$post)
     
     if($account->level >= $config::MODERATOR_USER_LEVEL)
     {
-        # Draft
+        # Set as draft
         $item->index_action_triggers[] = new action_trigger(array(
             "action_id" => "posts:set_as_draft",
             "caption"   => trim($current_module->language->actions->draft),
             "icon"      => "fa-times",
             "class"     => "color-orange",
             "options"   => array(
-                "remove_on_success" => true,
+                "remove_parent_on_success" => true,
             ),
             "params"    => array(
                 "id_post" => $post->id_post,
@@ -378,7 +294,7 @@ foreach($posts as &$post)
                 "icon"      => "fa-flag",
                 "class"     => "color-orange",
                 "options"   => array(
-                    "remove_on_success" => true,
+                    "remove_parent_on_success" => true,
                 ),
                 "params"    => array(
                     "id_post" => $post->id_post,
@@ -393,7 +309,7 @@ foreach($posts as &$post)
             "icon"      => "fa-trash",
             "class"     => "color-red",
             "options"   => array(
-                "remove_on_success" => true,
+                "remove_parent_on_success" => true,
             ),
             "params"    => array(
                 "id_post" => $post->id_post,
@@ -408,8 +324,73 @@ foreach($posts as &$post)
                 "caption"   => trim($current_module->language->actions->disable_author),
                 "icon"      => "fa-user-times",
                 "class"     => "color-red",
+                "params"    => array(
+                    "id_account" => $post->id_author,
+                ),
+            ));
+        }
+    }
+    
+    $item->has_index_actions = count($item->index_action_triggers) > 0;
+    
+    #
+    # Item actions
+    #
+    
+    if( $modules["contact"]->enabled && $account->id_account != $post->id_author && $account->level < $config::MODERATOR_USER_LEVEL )
+    {
+        # Report post
+        $item->item_action_triggers[] = new action_trigger(array(
+            "action_id" => "posts:report",
+            "caption"   => trim($current_module->language->actions->report),
+            "icon"      => "fa-exclamation-circle",
+            "class"     => "color-pink",
+            "params"    => array(
+                "id" => $post->id_post,
+            ),
+        ));
+    }
+    
+    if( $author->can_interact_in_pms() )
+    {
+        # PM
+        $item->item_action_triggers[] = new action_trigger(array(
+            "action_id" => "messaging:compose",
+            "caption"   => trim($language->contact->pm->caption),
+            "icon"      => "fa-inbox",
+            "class"     => "color-gray",
+            "params"    => array(
+                "target_id_account" => $comment->id_author
+            ),
+        ));
+    }
+    
+    if($account->level >= $config::MODERATOR_USER_LEVEL)
+    {
+        # Set as draft
+        $item->item_action_triggers[] = new action_trigger(array(
+            "action_id" => "posts:set_as_draft",
+            "caption"   => trim($current_module->language->actions->draft),
+            "icon"      => "fa-times",
+            "class"     => "color-orange",
+            "options"   => array(
+                "go_back_on_success" => true,
+            ),
+            "params"    => array(
+                "id_post" => $post->id_post,
+            ),
+        ));
+        
+        if( $account->id_account != $author->id_account && $author->level < $config::MODERATOR_USER_LEVEL )
+        {
+            # Flag for review
+            $item->item_action_triggers[] = new action_trigger(array(
+                "action_id" => "posts:flag_for_review",
+                "caption"   => trim($current_module->language->actions->review),
+                "icon"      => "fa-flag",
+                "class"     => "color-orange",
                 "options"   => array(
-                    "reload_feed_on_success" => true,
+                    "go_back_on_success" => true,
                 ),
                 "params"    => array(
                     "id_post" => $post->id_post,
@@ -417,8 +398,39 @@ foreach($posts as &$post)
             ));
         }
         
-        $item->has_index_actions = true;
+        # Trash
+        $item->item_action_triggers[] = new action_trigger(array(
+            "action_id" => "posts:trash",
+            "caption"   => trim($current_module->language->actions->trash),
+            "icon"      => "fa-trash",
+            "class"     => "color-red",
+            "options"   => array(
+                "go_back_on_success" => true,
+            ),
+            "params"    => array(
+                "id_post" => $post->id_post,
+            ),
+        ));
+        
+        if( $author->level < $config::MODERATOR_USER_LEVEL )
+        {
+            # Disable author account
+            $item->item_action_triggers[] = new action_trigger(array(
+                "action_id" => "accounts:disable",
+                "caption"   => trim($current_module->language->actions->disable_author),
+                "icon"      => "fa-user-times",
+                "class"     => "color-red",
+                "options"   => array(
+                    "go_back_on_success" => true,
+                ),
+                "params"    => array(
+                    "id_account" => $post->id_author,
+                ),
+            ));
+        }
     }
+    
+    $item->has_item_actions = count($item->item_action_triggers) > 0;
     
     #
     # Comments

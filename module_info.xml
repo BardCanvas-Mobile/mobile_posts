@@ -12,17 +12,16 @@
     </working_flags>
     
     <extension_areas_info><![CDATA[
-        JSON Posts feed: Extra content blocks for item.
-        JSON Posts feed: Comments forging.
+        JSON Posts feed: Before loop start / Extra content blocks for item / Comments forging.
     ]]></extension_areas_info>
     
     <extends_to>
         <mobile_controller>
             <services_registry>
-                <definitions>extenders/mobile_controller/services_registry_definitions.inc</definitions>
+                <definitions>extenders/services_registry_definitions.inc</definitions>
             </services_registry>
             <actions_registry>
-                <definitions>extenders/mobile_controller/actions_registry_definitions.inc</definitions>
+                <definitions>extenders/actions_registry_definitions.inc</definitions>
             </actions_registry>
         </mobile_controller>
     </extends_to>

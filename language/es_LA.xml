@@ -24,17 +24,38 @@
     <messages>
         <missing_scope>Error: no se ha recibido el ámbito (scope) de entradas a mostrar.</missing_scope>
         <invalid_scope>Error: el ámbito (scope) recibido no se ha reconocido.</invalid_scope>
+        <prompts>
+            <set_as_draft><![CDATA[
+                La entrada se marcará como borrador, ocultándola de todos los índices.<br><br>
+                ¿Deseas proceder?
+            ]]></set_as_draft>
+            <trash><![CDATA[
+                La entrada se enviará a la papelera, ocultándola de todos los índices.<br><br>
+                ¿Deseas proceder?
+            ]]></trash>
+            <flag_for_review><![CDATA[
+                La entrada se enviará a la papelera, ocultándola de todos los índices.<br><br>
+                ¿Deseas proceder?
+            ]]></flag_for_review>
+        </prompts>
+        <success_notifications>
+            <post_changed><![CDATA[
+                La entrada ha sido actualizada.
+                Necesitarás refrescar los listados del sitio web para que se reflejen los cambios.
+            ]]></post_changed>
+        </success_notifications>
     </messages>
     
     <all_categories>Todas las categorías</all_categories>
     
     <actions>
-        <disable_author>Deshabilitar autor</disable_author>
+        <disable_author>Desactivar autor</disable_author>
         <trash>A papelera</trash>
         <draft>A borrador</draft>
         <review>A revisión</review>
+        <report>Reportar</report>
     </actions>
-
+    
     <about_author>Acerca de {$author_display_name}</about_author>
     
     <exported_settings_data for="mobile_controller">

@@ -24,6 +24,25 @@
     <messages>
         <missing_scope>Error: posts scope to show not received. No posts will be delivered.</missing_scope>
         <invalid_scope>Error: the posts scope that has been received wasn't recognized. No posts will be delivered.</invalid_scope>
+        <prompts>
+            <set_as_draft><![CDATA[
+                The post will be set as draft, taking it out from all indexes.<br><br>
+                Do you want to proceed?
+            ]]></set_as_draft>
+            <trash><![CDATA[
+                The post will be sent to the trash can, taking it out from all indexes.<br><br>
+                Do you want to proceed?
+            ]]></trash>
+            <flag_for_review><![CDATA[
+                The post will be flagged for review and it will be taken out from indexes.<br><br>
+                Do you want to proceed?
+            ]]></flag_for_review>
+        </prompts>
+        <success_notifications>
+            <post_changed><![CDATA[
+                The post has been updated. You may need to refresh all the website feeds in order to see the changes.
+            ]]></post_changed>
+        </success_notifications>
     </messages>
     
     <all_categories>Todas las categorías</all_categories>
@@ -33,6 +52,7 @@
         <trash>To trash</trash>
         <draft>To draft</draft>
         <review>For review</review>
+        <report>Report</report>
     </actions>
     
     <about_author>About {$author_display_name}</about_author>
