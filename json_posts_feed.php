@@ -193,10 +193,11 @@ foreach($posts as &$post)
     $item->main_category_title   = $post->main_category_title;
     $item->parent_category_title = $all_categories[$post->main_category]->parent_category_title;
     
-    $item->title   = externalize_urls($post->get_processed_title(false));
-    $item->excerpt = externalize_urls($post->get_processed_excerpt(true));
-    $item->publishing_date = $post->publishing_date;
+    $item->permalink = $post->get_permalink(true);
+    $item->title     = externalize_urls($post->get_processed_title(false));
+    $item->excerpt   = externalize_urls($post->get_processed_excerpt(true));
     
+    $item->publishing_date   = $post->publishing_date;
     $item->content           = externalize_urls($post->get_processed_content());
     $item->creation_ip       = $post->creation_ip;
     $item->creation_location = $post->creation_location;
