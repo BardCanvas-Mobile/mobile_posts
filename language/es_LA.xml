@@ -103,6 +103,55 @@
             </options>
         </specs>
         
+        <specs key="posts_main_color_theme" required_modules="posts">
+            <title>Tema de color</title>
+            <description><![CDATA[
+                Selecciona un tema de color para mostrar el servicio.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value=""               >Azul (predeterminado)</option>
+                <option value="theme-lightblue">Azul claro</option>
+                <option value="theme-gray"     >Gris</option>
+                <option value="theme-red"      >Rojo</option>
+                <option value="theme-pink"     >Rosa</option>
+                <option value="theme-orange"   >Naranja</option>
+                <option value="theme-yellow"   >Amarillo</option>
+                <option value="theme-green"    >Verde</option>
+                <option value="layout-dark theme-blue"     >Azul       con fondo oscuro</option>
+                <option value="layout-dark theme-lightblue">Azul claro con fondo oscuro</option>
+                <option value="layout-dark theme-gray"     >Gris       con fondo oscuro</option>
+                <option value="layout-dark theme-red"      >Rojo       con fondo oscuro</option>
+                <option value="layout-dark theme-pink"     >Rosa       con fondo oscuro</option>
+                <option value="layout-dark theme-orange"   >Naranja    con fondo oscuro</option>
+                <option value="layout-dark theme-yellow"   >Amarillo   con fondo oscuro</option>
+                <option value="layout-dark theme-green"    >Verde      con fondo oscuro</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_main_auto_refresh" required_modules="posts">
+            <title>Auto-recarga automática</title>
+            <description><![CDATA[
+                Selecciona el intervalo de actualización automática del canal.<br>
+                <i class="fa fa-info-circle"></i> <b>Nota:</b>
+                Procura que el intervalo elegido sea mayor al tiempo de cacheo de datos
+                para ahorrar llamadas innecesarias a la base de datos.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value="">Desactivada</option>
+                <option value="10">10 minutos</option>
+                <option value="20">20 minutos</option>
+                <option value="30">30 minutos</option>
+                <option value="60">1 hora</option>
+                <option value="120">2 horas</option>
+                <option value="180">3 horas</option>
+                <option value="360">6 horas</option>
+                <option value="720">12 horas</option>
+                <option value="1440">24 horas</option>
+            </options>
+        </specs>
+        
         <specs key="posts_main_batch_size" required_modules="posts">
             <title>Cantidad de entradas por lote</title>
             <description><![CDATA[
@@ -289,6 +338,55 @@
                 <option value="feed/cards:modern"  >Muro de tarjetas "moderno"</option>
                 <option value="feed/cards:facebook">Muro de tarjetas estilo Facebook</option>
                 <option value="feed/media_list"    >Listado de medios</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt1_color_theme" required_modules="posts">
+            <title>Tema de color</title>
+            <description><![CDATA[
+                Selecciona un tema de color para mostrar el servicio.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value=""               >Azul (predeterminado)</option>
+                <option value="theme-lightblue">Azul claro</option>
+                <option value="theme-gray"     >Gris</option>
+                <option value="theme-red"      >Rojo</option>
+                <option value="theme-pink"     >Rosa</option>
+                <option value="theme-orange"   >Naranja</option>
+                <option value="theme-yellow"   >Amarillo</option>
+                <option value="theme-green"    >Verde</option>
+                <option value="layout-dark theme-blue"     >Azul       con fondo oscuro</option>
+                <option value="layout-dark theme-lightblue">Azul claro con fondo oscuro</option>
+                <option value="layout-dark theme-gray"     >Gris       con fondo oscuro</option>
+                <option value="layout-dark theme-red"      >Rojo       con fondo oscuro</option>
+                <option value="layout-dark theme-pink"     >Rosa       con fondo oscuro</option>
+                <option value="layout-dark theme-orange"   >Naranja    con fondo oscuro</option>
+                <option value="layout-dark theme-yellow"   >Amarillo   con fondo oscuro</option>
+                <option value="layout-dark theme-green"    >Verde      con fondo oscuro</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt1_auto_refresh" required_modules="posts">
+            <title>Auto-recarga automática</title>
+            <description><![CDATA[
+                Selecciona el intervalo de actualización automática del canal.<br>
+                <i class="fa fa-info-circle"></i> <b>Nota:</b>
+                Procura que el intervalo elegido sea mayor al tiempo de cacheo de datos
+                para ahorrar llamadas innecesarias a la base de datos.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value="">Desactivada</option>
+                <option value="10">10 minutos</option>
+                <option value="20">20 minutos</option>
+                <option value="30">30 minutos</option>
+                <option value="60">1 hora</option>
+                <option value="120">2 horas</option>
+                <option value="180">3 horas</option>
+                <option value="360">6 horas</option>
+                <option value="720">12 horas</option>
+                <option value="1440">24 horas</option>
             </options>
         </specs>
         
@@ -481,6 +579,55 @@
             </options>
         </specs>
         
+        <specs key="posts_alt2_color_theme" required_modules="posts">
+            <title>Tema de color</title>
+            <description><![CDATA[
+                Selecciona un tema de color para mostrar el servicio.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value=""               >Azul (predeterminado)</option>
+                <option value="theme-lightblue">Azul claro</option>
+                <option value="theme-gray"     >Gris</option>
+                <option value="theme-red"      >Rojo</option>
+                <option value="theme-pink"     >Rosa</option>
+                <option value="theme-orange"   >Naranja</option>
+                <option value="theme-yellow"   >Amarillo</option>
+                <option value="theme-green"    >Verde</option>
+                <option value="layout-dark theme-blue"     >Azul       con fondo oscuro</option>
+                <option value="layout-dark theme-lightblue">Azul claro con fondo oscuro</option>
+                <option value="layout-dark theme-gray"     >Gris       con fondo oscuro</option>
+                <option value="layout-dark theme-red"      >Rojo       con fondo oscuro</option>
+                <option value="layout-dark theme-pink"     >Rosa       con fondo oscuro</option>
+                <option value="layout-dark theme-orange"   >Naranja    con fondo oscuro</option>
+                <option value="layout-dark theme-yellow"   >Amarillo   con fondo oscuro</option>
+                <option value="layout-dark theme-green"    >Verde      con fondo oscuro</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt2_auto_refresh" required_modules="posts">
+            <title>Auto-recarga automática</title>
+            <description><![CDATA[
+                Selecciona el intervalo de actualización automática del canal.<br>
+                <i class="fa fa-info-circle"></i> <b>Nota:</b>
+                Procura que el intervalo elegido sea mayor al tiempo de cacheo de datos
+                para ahorrar llamadas innecesarias a la base de datos.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value="">Desactivada</option>
+                <option value="10">10 minutos</option>
+                <option value="20">20 minutos</option>
+                <option value="30">30 minutos</option>
+                <option value="60">1 hora</option>
+                <option value="120">2 horas</option>
+                <option value="180">3 horas</option>
+                <option value="360">6 horas</option>
+                <option value="720">12 horas</option>
+                <option value="1440">24 horas</option>
+            </options>
+        </specs>
+        
         <specs key="posts_alt2_batch_size" required_modules="posts">
             <title>Cantidad de entradas por lote</title>
             <description><![CDATA[
@@ -667,6 +814,55 @@
                 <option value="feed/cards:modern"  >Muro de tarjetas "moderno"</option>
                 <option value="feed/cards:facebook">Muro de tarjetas estilo Facebook</option>
                 <option value="feed/media_list"    >Listado de medios</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt3_color_theme" required_modules="posts">
+            <title>Tema de color</title>
+            <description><![CDATA[
+                Selecciona un tema de color para mostrar el servicio.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value=""               >Azul (predeterminado)</option>
+                <option value="theme-lightblue">Azul claro</option>
+                <option value="theme-gray"     >Gris</option>
+                <option value="theme-red"      >Rojo</option>
+                <option value="theme-pink"     >Rosa</option>
+                <option value="theme-orange"   >Naranja</option>
+                <option value="theme-yellow"   >Amarillo</option>
+                <option value="theme-green"    >Verde</option>
+                <option value="layout-dark theme-blue"     >Azul       con fondo oscuro</option>
+                <option value="layout-dark theme-lightblue">Azul claro con fondo oscuro</option>
+                <option value="layout-dark theme-gray"     >Gris       con fondo oscuro</option>
+                <option value="layout-dark theme-red"      >Rojo       con fondo oscuro</option>
+                <option value="layout-dark theme-pink"     >Rosa       con fondo oscuro</option>
+                <option value="layout-dark theme-orange"   >Naranja    con fondo oscuro</option>
+                <option value="layout-dark theme-yellow"   >Amarillo   con fondo oscuro</option>
+                <option value="layout-dark theme-green"    >Verde      con fondo oscuro</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt3_auto_refresh" required_modules="posts">
+            <title>Auto-recarga automática</title>
+            <description><![CDATA[
+                Selecciona el intervalo de actualización automática del canal.<br>
+                <i class="fa fa-info-circle"></i> <b>Nota:</b>
+                Procura que el intervalo elegido sea mayor al tiempo de cacheo de datos
+                para ahorrar llamadas innecesarias a la base de datos.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value="">Desactivada</option>
+                <option value="10">10 minutos</option>
+                <option value="20">20 minutos</option>
+                <option value="30">30 minutos</option>
+                <option value="60">1 hora</option>
+                <option value="120">2 horas</option>
+                <option value="180">3 horas</option>
+                <option value="360">6 horas</option>
+                <option value="720">12 horas</option>
+                <option value="1440">24 horas</option>
             </options>
         </specs>
         

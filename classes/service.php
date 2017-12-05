@@ -52,6 +52,8 @@ class service extends base_service
         
         $options = (object) array();
         
+        $options->autoRefreshMinutes   = (int) $settings->get("modules:mobile_controller.{$key}_auto_refresh");
+        $options->colorTheme           = $settings->get("modules:mobile_controller.{$key}_color_theme");
         $options->showsCommentsOnIndex = $settings->get("modules:mobile_controller.{$key}_comments_in_index") == "true";
         $options->hasNavbar            = false;
         
