@@ -360,7 +360,8 @@ foreach($posts as &$post)
             "icon"      => "fa-inbox",
             "class"     => "color-gray",
             "params"    => array(
-                "target_id_account" => $comment->id_author
+                "target"      => $author->id_account,
+                "target_name" => convert_emojis($author->display_name),
             ),
         ));
     }
