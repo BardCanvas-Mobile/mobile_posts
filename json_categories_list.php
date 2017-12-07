@@ -8,6 +8,7 @@
  * @param string "bcm_access_token"
  * @param string "bcm_platform"     ios|android
  * @param string "scope"            posts_main|posts_alt1|posts_alt2|posts_alt3
+ * @param bool   "for_selection"    Optional, if provided, first item will have a "select category" caption.
  * @param string "callback"         Optional, for AJAX call
  * 
  * @returns string JSON {message:string, data:mixed}
@@ -34,11 +35,12 @@ if( empty($_REQUEST["scope"]) )
 if( ! in_array($_REQUEST["scope"], array("posts_main", "posts_alt1", "posts_alt2", "posts_alt3")) )
     $toolbox->throw_response(trim($current_module->language->messages->invalid_scope));
 
-$dummy = new category_record(array(
-    "id_category" => "", "title" => trim($current_module->language->all_categories), "description" => ""
-));
-$dummy = $dummy->get_as_associative_array();
-$data  = $toolbox->get_categories_list($_REQUEST["scope"]);
+$caption = $_REQUEST["for_selection"] == "true"
+         ? trim($current_module->language->select_category)
+         : trim($current_module->language->all_categories);
+$dummy   = new category_record(array("id_category" => "", "title" => $caption, "description" => ""));
+$dummy   = $dummy->get_as_associative_array();
+$data    = $toolbox->get_categories_list($_REQUEST["scope"]);
 array_unshift($data, $dummy);
 
 $final_data = array();

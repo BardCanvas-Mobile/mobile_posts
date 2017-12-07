@@ -42,10 +42,14 @@
             <post_changed><![CDATA[
                 The post has been updated. You may need to refresh all the website feeds in order to see the changes.
             ]]></post_changed>
+            <post_saved><![CDATA[
+                The post has been saved. You may need to refresh all the website feeds in order to see the changes.
+            ]]></post_saved>
         </success_notifications>
     </messages>
     
-    <all_categories>Todas las categorías</all_categories>
+    <all_categories>All categories</all_categories>
+    <select_category>Select a category</select_category>
     
     <actions>
         <disable_author>Disable author</disable_author>
@@ -56,6 +60,16 @@
     </actions>
     
     <about_author>About {$author_display_name}</about_author>
+    
+    <remote_quick_post>
+        <title>Create quick post</title>
+        <contents>
+            <placeholder>Enter the contents of your post. You can add #hashtags as you normally do everywhere. Use the control below to attach images and videos.</placeholder>
+        </contents>
+        <attachments>
+            <title>Attach photos/videos</title>
+        </attachments>
+    </remote_quick_post>
     
     <!-- Todo: translate this!!! -->
     <exported_settings_data for="mobile_controller">

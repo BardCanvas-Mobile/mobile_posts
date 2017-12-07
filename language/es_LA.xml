@@ -43,10 +43,15 @@
                 La entrada ha sido actualizada.
                 Necesitarás refrescar los listados del sitio web para que se reflejen los cambios.
             ]]></post_changed>
+            <post_saved><![CDATA[
+                La entrada ha sido guardada.
+                Necesitarás refrescar los listados del sitio web para que se reflejen los cambios.
+            ]]></post_saved>
         </success_notifications>
     </messages>
     
     <all_categories>Todas las categorías</all_categories>
+    <select_category>Selecciona una categoría</select_category>
     
     <actions>
         <disable_author>Desactivar autor</disable_author>
@@ -58,6 +63,16 @@
     
     <about_author>Acerca de {$author_display_name}</about_author>
     
+    <remote_quick_post>
+        <title>Crear entrada rápida</title>
+        <contents>
+            <placeholder>Introduce el contenido de tu entrada. Puedes añadir #etiquetas como haces en cualquier otro lado. Usa el control debajo para anexar imágenes y videos.</placeholder>
+        </contents>
+        <attachments>
+            <title>Anexar fotos/videos</title>
+        </attachments>
+    </remote_quick_post>
+    
     <exported_settings_data for="mobile_controller">
         
         <!-- =========================================== -->
@@ -65,6 +80,16 @@
             Servicios: Entradas / índice principal
         </specs>
         <!-- =========================================== -->
+        
+        <specs key="posts_main_permitted_levels" required_modules="posts">
+            <title>Niveles permitidos para inclusión</title>
+            <description><![CDATA[
+                Si deseas que este servicio sólo se muestre a usuarios registrados con
+                ciertos niveleses, pecifícalos aquí separados por comas.
+                Si quieres que cualquiera pueda accesar, déjalo vacío. 
+            ]]></description>
+            <type>text</type>
+        </specs>
         
         <specs key="posts_main_style" required_modules="posts">
             <title>Estilo de despliegue</title>
@@ -259,6 +284,25 @@
             <type>yes/no</type>
         </specs>
         
+        <specs key="posts_main_hide_quick_post_trigger" required_modules="posts">
+            <title>¿Ocultar icono flotante de posteo rápido?</title>
+            <description><![CDATA[
+                De forma predeterminada, se muestra el icono para adición
+                de entradas para usuarios registrados.
+                Usa esta opción para desactivarlo. 
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_main_quick_post_trigger_levels_allowed" required_modules="posts">
+            <title>Niveles de usuario permitidos para muestreo de icono flotante de posteo rápido</title>
+            <description><![CDATA[
+                Especifica una lista separada por comas de los niveles de usuario
+                que podrán postear desde este listado usando la forma de posteo rápido. 
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
         <specs key="posts_main_standard_icon" required_modules="posts">
             <title>Icono estándar del servicio</title>
             <description><![CDATA[
@@ -303,6 +347,16 @@
                 <i>Úsalo sólo si deseas presentar más de un índice de entradas</i>
             ]]></specs>
         <!-- ============================================================= -->
+        
+        <specs key="posts_alt1_permitted_levels" required_modules="posts">
+            <title>Niveles permitidos para inclusión</title>
+            <description><![CDATA[
+                Si deseas que este servicio sólo se muestre a usuarios registrados con
+                ciertos niveles, especifícalos aquí separados por comas.
+                Si quieres que cualquiera pueda accesar, déjalo vacío. 
+            ]]></description>
+            <type>text</type>
+        </specs>
         
         <specs key="posts_alt1_style" required_modules="posts">
             <title>Estilo de despliegue</title>
@@ -497,6 +551,25 @@
             <type>yes/no</type>
         </specs>
         
+        <specs key="posts_alt1_hide_quick_post_trigger" required_modules="posts">
+            <title>¿Ocultar icono flotante de posteo rápido?</title>
+            <description><![CDATA[
+                De forma predeterminada, se muestra el icono para adición
+                de entradas para usuarios registrados.
+                Usa esta opción para desactivarlo. 
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt1_quick_post_trigger_levels_allowed" required_modules="posts">
+            <title>Niveles de usuario permitidos para muestreo de icono flotante de posteo rápido</title>
+            <description><![CDATA[
+                Especifica una lista separada por comas de los niveles de usuario
+                que podrán postear desde este listado usando la forma de posteo rápido. 
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
         <specs key="posts_alt1_standard_icon" required_modules="posts">
             <title>Icono estándar del servicio</title>
             <description><![CDATA[
@@ -541,6 +614,16 @@
                 <i>Úsalo sólo si deseas presentar más de un índice de entradas</i>
             ]]></specs>
         <!-- ============================================================= -->
+        
+        <specs key="posts_alt2_permitted_levels" required_modules="posts">
+            <title>Niveles permitidos para inclusión</title>
+            <description><![CDATA[
+                Si deseas que este servicio sólo se muestre a usuarios registrados con
+                ciertos niveles, especifícalos aquí separados por comas.
+                Si quieres que cualquiera pueda accesar, déjalo vacío. 
+            ]]></description>
+            <type>text</type>
+        </specs>
         
         <specs key="posts_alt2_style" required_modules="posts">
             <title>Estilo de despliegue</title>
@@ -735,6 +818,25 @@
             <type>yes/no</type>
         </specs>
         
+        <specs key="posts_alt2_hide_quick_post_trigger" required_modules="posts">
+            <title>¿Ocultar icono flotante de posteo rápido?</title>
+            <description><![CDATA[
+                De forma predeterminada, se muestra el icono para adición
+                de entradas para usuarios registrados.
+                Usa esta opción para desactivarlo. 
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt2_quick_post_trigger_levels_allowed" required_modules="posts">
+            <title>Niveles de usuario permitidos para muestreo de icono flotante de posteo rápido</title>
+            <description><![CDATA[
+                Especifica una lista separada por comas de los niveles de usuario
+                que podrán postear desde este listado usando la forma de posteo rápido. 
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
         <specs key="posts_alt2_standard_icon" required_modules="posts">
             <title>Icono estándar del servicio</title>
             <description><![CDATA[
@@ -779,6 +881,16 @@
                 <i>Úsalo sólo si deseas presentar más de un índice de entradas</i>
             ]]></specs>
         <!-- ============================================================= -->
+        
+        <specs key="posts_alt3_permitted_levels" required_modules="posts">
+            <title>Nivels permitidos para inclusión</title>
+            <description><![CDATA[
+                Si deseas que este servicio sólo se muestre a usuarios registrados con
+                ciertos niveles, especifícalos aquí separados por comas.
+                Si quieres que cualquiera pueda accesar, déjalo vacío. 
+            ]]></description>
+            <type>text</type>
+        </specs>
         
         <specs key="posts_alt3_style" required_modules="posts">
             <title>Estilo de despliegue</title>
@@ -971,6 +1083,25 @@
                 Puedes desactivarlo usando esta opción.
             ]]></description>
             <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt3_hide_quick_post_trigger" required_modules="posts">
+            <title>¿Ocultar icono flotante de posteo rápido?</title>
+            <description><![CDATA[
+                De forma predeterminada, se muestra el icono para adición
+                de entradas para usuarios registrados.
+                Usa esta opción para desactivarlo. 
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt3_quick_post_trigger_levels_allowed" required_modules="posts">
+            <title>Niveles de usuario permitidos para muestreo de icono flotante de posteo rápido</title>
+            <description><![CDATA[
+                Especifica una lista separada por comas de los niveles de usuario
+                que podrán postear desde este listado usando la forma de posteo rápido. 
+            ]]></description>
+            <type>text</type>
         </specs>
         
         <specs key="posts_alt3_standard_icon" required_modules="posts">

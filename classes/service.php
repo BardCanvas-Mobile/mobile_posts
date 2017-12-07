@@ -1,6 +1,7 @@
 <?php
 namespace hng2_modules\mobile_posts;
 
+use hng2_modules\mobile_controller\action_trigger;
 use hng2_modules\mobile_controller\service as base_service;
 
 class service extends base_service
@@ -57,6 +58,19 @@ class service extends base_service
         $options->showsCommentsOnIndex = $settings->get("modules:mobile_controller.{$key}_comments_in_index") == "true";
         $options->hasNavbar            = false;
         
+        $options->showFloatingActionButton
+            = $settings->get("modules:mobile_controller.{$key}_hide_quick_post_trigger") != "true";
+        $options->floatingActionButtonTrigger
+            = new action_trigger(array(
+                "action_id" => "posts:quickpost",
+                "class"     => str_replace(array("layout-dark", "layout-white", "theme"), array("", "", "color"), $options->colorTheme),
+                "icon"      => "add,fa-plus",
+            ));
+        $options->floatingActionButtonUserLevelsAllowed = array();
+        if( $settings->get("modules:mobile_controller.{$key}_quick_post_trigger_levels_allowed") != "" )
+            $options->floatingActionButtonUserLevelsAllowed
+                = preg_split('/\s*,\s*/', $settings->get("modules:mobile_controller.{$key}_quick_post_trigger_levels_allowed"));
+        
         if( $settings->get("modules:mobile_controller.{$key}_hide_category_selector") != "true" ||
             $settings->get("modules:mobile_controller.{$key}_hide_search_helper")     != "true" )
         {
@@ -87,14 +101,33 @@ class service extends base_service
         
         $options->showAuthors = $settings->get("modules:mobile_controller.{$key}_show_authors") == "true";
         
+        $requires = null;
+        if( $settings->get("modules:mobile_controller.{$key}_permitted_levels") != "" )
+        {
+            $levels = preg_split('/\s*,\s*/', $settings->get("modules:mobile_controller.{$key}_permitted_levels"));
+            foreach($levels as &$level) $level = (int) $level;
+            $requires = (object) array("user_level" => $levels);
+        }
+        
         $manifest->services[] = (object) array(
             "id"         => "{$this->module}-{$this->key}",
             "caption"    => $this->label,
             "type"       => $style,
             "url"        => ltrim("{$current_module->get_url(false)}/json_posts_feed.php?scope={$key}", "/"),
             "icon"       => $icon,
+            "requires"   => $requires,
+            "vars"       => $this->build_service_vars($key),
             "options"    => $options,
         );
         
+    }
+    
+    private function build_service_vars($scope)
+    {
+        $vars = (object) array(
+            "scope" => $scope,
+        );
+        
+        return $vars;
     }
 }

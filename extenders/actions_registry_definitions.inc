@@ -64,3 +64,62 @@ if( $modules["contact"]->enabled )
         "call_method" => "frame",
     ));
 }
+
+# Quick post
+
+$composer_fields = (object) array();
+
+$composer_fields->attachments_type = (object) array(
+    "type"  => "hidden",
+    "value" => "preforged",
+);
+$composer_fields->raw_success_confirmation = (object) array(
+    "type"  => "hidden",
+    "value" => "true",
+);
+$composer_fields->status = (object) array(
+    "type"  => "hidden",
+    "value" => "published",
+);
+$composer_fields->is_quick_post = (object) array(
+    "type"  => "hidden",
+    "value" => "true",
+);
+$composer_fields->ok_with_url = (object) array(
+    "type"  => "hidden",
+    "value" => "false",
+);
+$composer_fields->title = (object) array(
+    "type"        => "textarea/expandible",
+    "placeholder" => trim($modules["posts"]->language->form->fields->title->quick_form_expanded_placeholder),
+);
+$composer_fields->main_category = (object) array(
+    "type"       => "select",
+    "attributes" => "data-remotely-filled=\"true\" data-options-src=\"{$this_module->get_url(true)}/json_categories_list.php?scope={{service.vars.scope}}&for_selection=true\"",
+);
+
+$config->globals["modules:mobile_posts.composer_fields"] =& $composer_fields;
+$this_module->load_extensions("actions_registry_definitions", "set_composer_fields_before_content");
+
+$composer_fields->content = (object) array(
+    "type"        => "textarea/tinymce",
+    "placeholder" => trim($this_module->language->remote_quick_post->contents->placeholder),
+);
+$composer_fields->attachments = (object) array(
+    "type"        => "local_media_selector",
+    "title"       => trim($this_module->language->remote_quick_post->attachments->title),
+);
+
+$manifest->actionsRegistry["posts:quickpost"] = new action(array(
+    "id"          => "posts:quickpost",
+    "module_name" => "posts",
+    "script_url"  => "{$modules["posts"]->get_url(true)}/scripts/save.php",
+    "call_method" => "posting_form_composer",
+    "options"     => (object) array(
+        "composer" => (object) array(
+            "title"                => trim($this_module->language->remote_quick_post->title),
+            "success_notification" => unindent($this_module->language->messages->success_notifications->post_saved),
+            "fields"               => $composer_fields
+        )
+    ),
+));

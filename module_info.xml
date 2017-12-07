@@ -13,6 +13,7 @@
     
     <extension_areas_info><![CDATA[
         JSON Posts feed: Before loop start / Extra content blocks for item / Comments forging.
+        Actions registry definitions: Set Composer fields before content
     ]]></extension_areas_info>
     
     <extends_to>
