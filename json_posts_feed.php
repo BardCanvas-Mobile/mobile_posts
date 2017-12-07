@@ -439,7 +439,7 @@ foreach($posts as &$post)
     # Comments
     #
     
-    $item->comments_count = $post->comments_count;
+    $item->comments_count = (int) $post->comments_count;
     $current_module->load_extensions("json_posts_feed", "comments_forging");
     
     #
@@ -449,7 +449,7 @@ foreach($posts as &$post)
     $items[] = $item;
 }
 
-if( ! $account->_exists ) $mem_cache->set($cache_key, $items, 0, $cache_ttl);
+# if( ! $account->_exists ) $mem_cache->set($cache_key, $items, 0, $cache_ttl);
 
 $toolbox->throw_response(array(
     "message" => "OK",
