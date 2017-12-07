@@ -196,6 +196,7 @@ foreach($posts as &$post)
     $item->permalink = $post->get_permalink(true);
     $item->title     = externalize_urls($post->get_processed_title(false));
     $item->excerpt   = externalize_urls($post->get_processed_excerpt(true));
+    $item->tags_list = $post->tags_list;
     
     $item->publishing_date   = $post->publishing_date;
     $item->content           = externalize_urls($post->get_processed_content());
