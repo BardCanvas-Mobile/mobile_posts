@@ -57,6 +57,7 @@ class service extends base_service
         $options->colorTheme           = $settings->get("modules:mobile_controller.{$key}_color_theme");
         $options->showsCommentsOnIndex = $settings->get("modules:mobile_controller.{$key}_comments_in_index") == "true";
         $options->hasNavbar            = false;
+        $options->singleItemFetcherURL = "{$current_module->get_url(true)}/single_item_json.php";
         
         $options->showFloatingActionButton
             = $settings->get("modules:mobile_controller.{$key}_hide_quick_post_trigger") != "true";

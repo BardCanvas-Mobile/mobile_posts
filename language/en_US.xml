@@ -46,6 +46,8 @@
                 The post has been saved. You may need to refresh all the website feeds in order to see the changes.
             ]]></post_saved>
         </success_notifications>
+        <missing_post_id>You haven't provided a valid post id.</missing_post_id>
+        <post_not_found>The post wasn't found in the database.</post_not_found>
     </messages>
     
     <all_categories>All categories</all_categories>

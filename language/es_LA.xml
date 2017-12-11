@@ -48,6 +48,8 @@
                 Necesitarás refrescar los listados del sitio web para que se reflejen los cambios.
             ]]></post_saved>
         </success_notifications>
+        <missing_post_id>No has proporcionado un identificador de entrada válido.</missing_post_id>
+        <post_not_found>No se ha encontrado la entrada en la base de datos.</post_not_found>
     </messages>
     
     <all_categories>Todas las categorías</all_categories>
