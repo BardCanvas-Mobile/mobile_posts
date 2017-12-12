@@ -61,6 +61,7 @@
         <draft>A borrador</draft>
         <review>A revisión</review>
         <report>Reportar</report>
+        <edit>Editar</edit>
     </actions>
     
     <about_author>Acerca de {$author_display_name}</about_author>

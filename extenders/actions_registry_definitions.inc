@@ -65,7 +65,9 @@ if( $modules["contact"]->enabled )
     ));
 }
 
+#
 # Quick post
+#
 
 $composer_fields = (object) array();
 
@@ -122,4 +124,12 @@ $manifest->actionsRegistry["posts:quickpost"] = new action(array(
             "fields"               => $composer_fields
         )
     ),
+));
+
+# Edit
+$manifest->actionsRegistry["posts:edit"] = new action(array(
+    "id"          => "posts:edit",
+    "call_method" => "frame",
+    "module_name" => "posts",
+    "script_url"  => "{$modules["posts"]->get_url(true)}/index.php?bcm_minimalistic_mode_enforced=true&bcm_minimalistic_sandboxing_disabled=true&hide_browser=true&iframed_message_on_sucessful_save=true&bcm_output_type=HTML&post_form_iframed_mode=true&hide_post_preview=true",
 ));

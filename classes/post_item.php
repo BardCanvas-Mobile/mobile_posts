@@ -119,6 +119,17 @@ class post_item extends feed_item
         
         if($account->level >= $config::MODERATOR_USER_LEVEL)
         {
+            # Edit
+            $this->index_action_triggers[] = new action_trigger(array(
+                "action_id" => "posts:edit",
+                "caption"   => trim($current_module->language->actions->edit),
+                "icon"      => "fa-pencil",
+                "class"     => "color-gray",
+                "params"    => array(
+                    "edit_post" => $post->id_post,
+                ),
+            ));
+            
             # Set as draft
             $this->index_action_triggers[] = new action_trigger(array(
                 "action_id" => "posts:set_as_draft",
@@ -184,6 +195,20 @@ class post_item extends feed_item
         #
         # Item actions
         #
+        
+        if( $post->can_be_edited() )
+        {
+            # Edit
+            $this->item_action_triggers[] = new action_trigger(array(
+                "action_id" => "posts:edit",
+                "caption"   => trim($current_module->language->actions->edit),
+                "icon"      => "fa-pencil",
+                "class"     => "color-gray",
+                "params"    => array(
+                    "edit_post" => $post->id_post,
+                ),
+            ));
+        }
         
         if( $modules["contact"]->enabled && $account->id_account != $post->id_author && $account->level < $config::MODERATOR_USER_LEVEL )
         {
