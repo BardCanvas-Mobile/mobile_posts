@@ -13,7 +13,7 @@ class post_item extends feed_item
     public function prepare(post_record $post)
     {
         global $account, $config, $modules, $language;
-    
+        
         $current_module = $modules["mobile_posts"];
         
         $author = $post->get_author();

@@ -120,9 +120,9 @@
                         y una sección extra con los datos adicionales (comentarios, etc.)
                     </li>
                     <li>
-                        <b>Listado de medios:</b>
-                        Despliegue similar a Twitter, poniendo el avatar del
-                        autor a la izquierda y los datos a la derecha.
+                        <b>Muro de tarjetas estilo Reddit:</b>
+                        Índice de vistazo rápido con miniaturas (sin extractos).
+                        No incluye comentarios, sólo el total de estos.
                     </li>
                 </ul>
             ]]></description>
@@ -131,7 +131,7 @@
                 <option value="feed/cards:simple"  >Muro simple de tarjetas</option>
                 <option value="feed/cards:modern"  >Muro de tarjetas "moderno"</option>
                 <option value="feed/cards:facebook">Muro de tarjetas estilo Facebook</option>
-                <option value="feed/media_list"    >Listado de medios</option>
+                <option value="feed/cards:reddit"  >Muro de tarjetas estilo Reddit</option>
             </options>
         </specs>
         
@@ -411,9 +411,9 @@
                         y una sección extra con los datos adicionales (comentarios, etc.)
                     </li>
                     <li>
-                        <b>Listado de medios:</b>
-                        Despliegue similar a Twitter, poniendo el avatar del
-                        autor a la izquierda y los datos a la derecha.
+                        <b>Muro de tarjetas estilo Reddit:</b>
+                        Índice de vistazo rápido con miniaturas (sin extractos).
+                        No incluye comentarios, sólo el total de estos.
                     </li>
                 </ul>
             ]]></description>
@@ -422,7 +422,7 @@
                 <option value="feed/cards:simple"  >Muro simple de tarjetas</option>
                 <option value="feed/cards:modern"  >Muro de tarjetas "moderno"</option>
                 <option value="feed/cards:facebook">Muro de tarjetas estilo Facebook</option>
-                <option value="feed/media_list"    >Listado de medios</option>
+                <option value="feed/cards:reddit"  >Muro de tarjetas estilo Reddit</option>
             </options>
         </specs>
         
@@ -702,9 +702,9 @@
                         y una sección extra con los datos adicionales (comentarios, etc.)
                     </li>
                     <li>
-                        <b>Listado de medios:</b>
-                        Despliegue similar a Twitter, poniendo el avatar del
-                        autor a la izquierda y los datos a la derecha.
+                        <b>Muro de tarjetas estilo Reddit:</b>
+                        Índice de vistazo rápido con miniaturas (sin extractos).
+                        No incluye comentarios, sólo el total de estos.
                     </li>
                 </ul>
             ]]></description>
@@ -713,7 +713,7 @@
                 <option value="feed/cards:simple"  >Muro simple de tarjetas</option>
                 <option value="feed/cards:modern"  >Muro de tarjetas "moderno"</option>
                 <option value="feed/cards:facebook">Muro de tarjetas estilo Facebook</option>
-                <option value="feed/media_list"    >Listado de medios</option>
+                <option value="feed/cards:reddit"  >Muro de tarjetas estilo Reddit</option>
             </options>
         </specs>
         
@@ -993,9 +993,9 @@
                         y una sección extra con los datos adicionales (comentarios, etc.)
                     </li>
                     <li>
-                        <b>Listado de medios:</b>
-                        Despliegue similar a Twitter, poniendo el avatar del
-                        autor a la izquierda y los datos a la derecha.
+                        <b>Muro de tarjetas estilo Reddit:</b>
+                        Índice de vistazo rápido con miniaturas (sin extractos).
+                        No incluye comentarios, sólo el total de estos.
                     </li>
                 </ul>
             ]]></description>
@@ -1004,7 +1004,7 @@
                 <option value="feed/cards:simple"  >Muro simple de tarjetas</option>
                 <option value="feed/cards:modern"  >Muro de tarjetas "moderno"</option>
                 <option value="feed/cards:facebook">Muro de tarjetas estilo Facebook</option>
-                <option value="feed/media_list"    >Listado de medios</option>
+                <option value="feed/cards:reddit"  >Muro de tarjetas estilo Reddit</option>
             </options>
         </specs>
         
