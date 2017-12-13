@@ -234,7 +234,7 @@ class post_item extends feed_item
                 "class"     => "color-gray",
                 "params"    => array(
                     "target"      => $author->id_account,
-                    "target_name" => convert_emojis($author->display_name),
+                    "target_name" => $author->display_name,
                 ),
             ));
         }
