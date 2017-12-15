@@ -25,6 +25,11 @@
                 <definitions>extenders/actions_registry_definitions.inc</definitions>
             </actions_registry>
         </mobile_controller>
+        <posts>
+            <save_post>
+                <before_extracting_media_items>extenders/quick_post_embedded_attachments.inc</before_extracting_media_items>
+            </save_post>
+        </posts>
     </extends_to>
     
 </module>
