@@ -11,6 +11,7 @@
  * @param string "category"         id of the category to show
  * @param int    "since"            start date 
  * @param int    "until"            end date 
+ * @param string "search"           String to search
  * @param string "callback"         Optional, for AJAX call
  * 
  * @var module $current_module
@@ -94,6 +95,22 @@ $accounts_repository   = new accounts_repository();
 #
 
 $filter = array();
+
+if( ! empty($_REQUEST["search"]) )
+{
+    $terms    = addslashes(trim(stripslashes($_REQUEST["search"])));
+    $filter[] = "(
+        title LIKE '%{$terms}%'
+        or
+        content LIKE '%{$terms}%'
+        or
+        id_author in (
+            select id_account from account
+            where account.display_name like '%{$terms}%'
+            or account.user_name like '%{$terms}%'
+        )
+    )";
+}
 
 # By category
 if( ! empty($_REQUEST["category"]) )

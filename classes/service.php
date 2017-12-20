@@ -93,7 +93,7 @@ class service extends base_service
                 $options->hasNavbar       = true;
                 $options->navbarHelpers[] = (object) array(
                     "type"             => "searchbox",
-                    "contentsProvider" => ltrim("{$current_module->get_url(false)}/json_search.php", "/")
+                    "contentsProvider" => ltrim("{$current_module->get_url(false)}/json_posts_feed.php", "/")
                 );
             }
             
