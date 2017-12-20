@@ -96,6 +96,7 @@ $accounts_repository   = new accounts_repository();
 
 $filter = array();
 
+# Search
 if( ! empty($_REQUEST["search"]) )
 {
     $terms    = addslashes(trim(stripslashes($_REQUEST["search"])));
@@ -151,6 +152,26 @@ if( ! empty($raw_list) )
 $raw_list = $settings->get("modules:mobile_controller.{$_REQUEST["scope"]}_excluded_author_levels");
 if( ! empty($raw_list) )
     $filter[] = "( select level from account where account.id_account = posts.id_author ) not in ($raw_list)";
+
+# Included tags
+$raw_list = $settings->get("modules:mobile_controller.{$_REQUEST["scope"]}_listed_hashtags");
+if( ! empty($raw_list) )
+{
+    $lines = explode("\n", $raw_list);
+    $keys  = array();
+    foreach($lines as $line) $keys[] = "'" . trim(str_replace("#", "", $line)) . "'";
+    $filter[] = "id_post in ( select pt.id_post from post_tags pt where pt.tag in (" .implode(", ", $keys) . ") )";
+}
+
+# Excluded tags
+$raw_list = $settings->get("modules:mobile_controller.{$_REQUEST["scope"]}_excluded_hashtags");
+if( ! empty($raw_list) )
+{
+    $lines = explode("\n", $raw_list);
+    $keys  = array();
+    foreach($lines as $line) $keys[] = "'" . trim(str_replace("#", "", $line)) . "'";
+    $filter[] = "id_post not in ( select pt.id_post from post_tags pt where pt.tag in (" .implode(", ", $keys) . ") )";
+}
 
 #
 # Data grabbing
