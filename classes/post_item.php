@@ -79,12 +79,13 @@ class post_item extends feed_item
                 </div>
             ";
             
-            $extra_details[] = "
-                <div class='fa-bulleted'>
-                    <i class='fa fa-globe fa-fw'></i>
-                    {$post->creation_ip}
-                </div>
-            ";
+            if( ! empty($post->creation_ip) )
+                $extra_details[] = "
+                    <div class='fa-bulleted'>
+                        <i class='fa fa-globe fa-fw'></i>
+                        {$post->creation_ip}
+                    </div>
+                ";
             
             if( ! empty($post->creation_location) )
                 $extra_details[] = "
