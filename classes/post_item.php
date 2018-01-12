@@ -1,11 +1,14 @@
 <?php
 namespace hng2_modules\mobile_posts;
 
+use hng2_media\media_repository;
 use hng2_modules\categories\categories_repository;
 use hng2_modules\categories\category_record;
 use hng2_modules\mobile_controller\action_trigger;
 use hng2_modules\mobile_controller\content_block;
 use hng2_modules\mobile_controller\feed_item;
+use hng2_modules\mobile_controller\media_processor_args;
+use hng2_modules\mobile_controller\toolbox as mobile_controller_toolbox;
 use hng2_modules\posts\post_record;
 
 class post_item extends feed_item
@@ -16,8 +19,8 @@ class post_item extends feed_item
         
         $current_module = $modules["mobile_posts"];
         
-        $author = $post->get_author();
-        $all_countries = $this->get_all_countries();
+        $author         = $post->get_author();
+        $all_countries  = $this->get_all_countries();
         $all_categories = $this->get_all_categories();
         
         $this->type                 = "post";
@@ -32,6 +35,7 @@ class post_item extends feed_item
         $this->featured_image_id        = $post->id_featured_image;
         $this->featured_image_path      = $post->featured_image_path;
         $this->featured_image_thumbnail = $post->featured_image_thumbnail;
+        $this->resample_featured_image();
         
         $this->has_featured_image             = ! empty($post->id_featured_image);
         $this->featured_image_not_in_contents = stristr($post->content, $post->id_featured_image) === false;
@@ -343,5 +347,46 @@ class post_item extends feed_item
         foreach($raw_categories as $category) $all_categories[$category->id_category] = $category;
         
         return $all_categories;
+    }
+    
+    protected function resample_featured_image()
+    {
+        global $config;
+        
+        if( empty($this->featured_image_id) ) return;
+        
+        $repository = $config->globals["modules:mobile_posts.media_repository"];
+        if( empty($repository) )
+        {
+            $repository = new media_repository();
+            $config->globals["modules:mobile_posts.media_repository"] = $repository;
+        }
+        
+        $item = $repository->get($this->featured_image_id);
+        if( is_null($item) ) return;
+        
+        $type = $item->type;
+        if( $type != "image" ) return;
+        if( trim(strtolower(end(explode(".", $item->path)))) == "gif" ) return;
+        
+        $args = $config->globals["modules:mobile_posts.media_processor_args"];
+        if( empty($args) )
+        {
+            $args = new media_processor_args();
+            $config->globals["modules:mobile_posts.media_processor_args"] = $args;
+        }
+        
+        $toolbox = $config->globals["modules:mobile_controller.toolbox"];
+        if( empty($toolbox) ) {
+            $toolbox = new mobile_controller_toolbox();
+            $config->globals["modules:mobile_controller.toolbox"] = $toolbox;
+        }
+        
+        if( ! $args->is_processable($type) ) return;
+        
+        $res = $toolbox->resample_image($item, $args);
+        if( is_null($res) ) return;
+        
+        $this->featured_image_path = "/mediaserver/" . dirname($item->path) . "/" . $res;
     }
 }
