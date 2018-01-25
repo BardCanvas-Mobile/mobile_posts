@@ -331,7 +331,7 @@
         <specs key="posts_main_standard_icon" display_group="posts_main" required_modules="posts">
             <title>Icono estándar del servicio</title>
             <description><![CDATA[
-                La plataforma móvil usa iconos distiontos para iOS y Android.
+                La plataforma móvil usa iconos distintos para iOS y Android.
                 Para iOS, se usa el set de Framework7 y para Android se usa Font Awesome.
                 Aquí debes especificar ambos separados por una coma, p.e.:<br><br>
                 
@@ -622,7 +622,7 @@
         <specs key="posts_alt1_standard_icon" display_group="posts_alt1" required_modules="posts">
             <title>Icono estándar del servicio</title>
             <description><![CDATA[
-                La plataforma móvil usa iconos distiontos para iOS y Android.
+                La plataforma móvil usa iconos distintos para iOS y Android.
                 Para iOS, se usa el set de Framework7 y para Android se usa Font Awesome.
                 Aquí debes especificar ambos separados por una coma, p.e.:<br><br>
                 
@@ -913,7 +913,7 @@
         <specs key="posts_alt2_standard_icon" display_group="posts_alt2" required_modules="posts">
             <title>Icono estándar del servicio</title>
             <description><![CDATA[
-                La plataforma móvil usa iconos distiontos para iOS y Android.
+                La plataforma móvil usa iconos distintos para iOS y Android.
                 Para iOS, se usa el set de Framework7 y para Android se usa Font Awesome.
                 Aquí debes especificar ambos separados por una coma, p.e.:<br><br>
                 
@@ -1204,7 +1204,7 @@
         <specs key="posts_alt3_standard_icon" display_group="posts_alt3" required_modules="posts">
             <title>Icono estándar del servicio</title>
             <description><![CDATA[
-                La plataforma móvil usa iconos distiontos para iOS y Android.
+                La plataforma móvil usa iconos distintos para iOS y Android.
                 Para iOS, se usa el set de Framework7 y para Android se usa Font Awesome.
                 Aquí debes especificar ambos separados por una coma, p.e.:<br><br>
                 
