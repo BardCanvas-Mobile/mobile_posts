@@ -74,8 +74,1135 @@
         </attachments>
     </remote_quick_post>
     
-    <!-- Todo: translate this!!! -->
     <exported_settings_data for="mobile_controller">
+        
+        <specs key="posts_main_configurator" required_modules="posts" highlight_class="enabled">
+            <title>Services: Posts / main index</title>
+            <description><![CDATA[
+                Main posts index.
+                Use the options on this container to define the appearance and functionality of this service.
+            ]]></description>
+            <type>button</type>
+            <options>
+                <caption><![CDATA[
+                    <i class="fa fa-cog"></i> Configure
+                ]]></caption>
+                <onclick>open_settings_display_group("mobile_controller", "posts_main", "Posts / main index"); return false;</onclick>
+            </options>
+        </specs>
+        
+        <!-- ====================================================================================== -->
+        <specs is_separator="true" display_group="posts_main" required_modules="posts">Behavior</specs>
+        <!-- ====================================================================================== -->
+        
+        <specs key="posts_main_style" display_group="posts_main" required_modules="posts">
+            <title>Display style</title>
+            <description><![CDATA[
+                Select the display style of the posts index:
+                <ul>
+                    <li>
+                        <b>Simple cards wall:</b>
+                        Only text, dividing details in sections.
+                    </li>
+                    <li>
+                        <b>"Modern" style cards:</b>
+                        Shows the title in white with a dark shadow
+                        <b>inside</b> the featured image on each post.
+                    </li>
+                    <li>
+                        <b>Facebook style cards:</b>
+                        Divided in three sections:
+                        Author details and publishing date on the header,
+                        Title, featured image and excerpt on another section
+                        and an extra section with additional details (comments, etc.)
+                    </li>
+                    <li>
+                        <b>Reddit style cards:</b>
+                        Quick view index with thumbnails (no excerpts).
+                        Doesn't include comments, only the total.
+                    </li>
+                </ul>
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value="feed/cards:simple"  >Simple cards wall</option>
+                <option value="feed/cards:modern"  >"Modern" style cards</option>
+                <option value="feed/cards:facebook">Facebook style cards</option>
+                <option value="feed/cards:reddit"  >Reddit style cards</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_main_permitted_levels" display_group="posts_main" required_modules="posts">
+            <title>Permitted levels for inclusion</title>
+            <description><![CDATA[
+                If you want this service to show contents only to users with certain levels,
+                specify them here separated by commas.
+                If empty, everyone (registered or not) will show this index.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_main_batch_size" display_group="posts_main" required_modules="posts">
+            <title>Posts per screen</title>
+            <description><![CDATA[
+                Specify the amount of posts to download per screen.<br>
+                Default value: <code>10</code>.
+            ]]></description>
+            <type>number</type>
+        </specs>
+        
+        <specs key="posts_main_comments_in_index" display_group="posts_main" required_modules="posts">
+            <title>Include comments</title>
+            <description><![CDATA[
+                Enable this switch to include comments on the index.<br>
+                <i class="fa fa-info-circle"></i> Note:
+                This option will be ignored if the comments system is disabled
+                or overriden by a module with an external source, like the <b>Facebook
+                Comments</b> module.
+            ]]></description>
+            <type>boolean</type>
+        </specs>
+        
+        <specs key="posts_main_listed_categories" display_group="posts_main" required_modules="posts">
+            <title>Categories to include</title>
+            <description><![CDATA[
+                List of category slugs to show on this index.
+                If empty, all of them will be included.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_main_excluded_categories" display_group="posts_main" required_modules="posts">
+            <title>Excluded categories</title>
+            <description><![CDATA[
+                List of category slugs that will be excluded from this index.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_main_listed_hashtags" display_group="posts_main" required_modules="posts">
+            <title>Limit to these tags</title>
+            <description><![CDATA[
+                If you want to show posts that have certain hashtags,
+                specify them here, one per line.
+                The posts that have at least one of the tags on this list will be included.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_main_excluded_hashtags" display_group="posts_main" required_modules="posts">
+            <title>Exclude posts with these tags</title>
+            <description><![CDATA[
+                If you want to exclude posts with certain hashtags, specify them here, one per line.
+                The posts that have at least one of the tags on this list will be excluded.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_main_listed_author_levels" display_group="posts_main" required_modules="posts">
+            <title>Limit to these author levels</title>
+            <description><![CDATA[
+                If you want to show posts of only certain author levels, specify them here, separated by commas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_main_excluded_author_levels" display_group="posts_main" required_modules="posts">
+            <title>Exclude the next author levels</title>
+            <description><![CDATA[
+                If you want to exclude posts from certain author levels, specify them here, separated by commas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <!-- ============================================================================================ -->
+        <specs is_separator="true" display_group="posts_main" required_modules="posts">Funcionalidad </specs>
+        <!-- ============================================================================================ -->
+        
+        <specs key="posts_main_auto_refresh" display_group="posts_main" required_modules="posts">
+            <title>Automatic reload</title>
+            <description><![CDATA[
+                Select the automatic reload interval for the channel.<br>
+                <i class="fa fa-info-circle"></i> <b>Note:</b>
+                Select an interval higher than the posts caching parameters you specified for the
+                posts module to avoid unnecessary calls to the database.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value="">Disabled</option>
+                <option value="10">10 minutes</option>
+                <option value="20">20 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="60">1 hour</option>
+                <option value="120">2 hours</option>
+                <option value="180">3 hours</option>
+                <option value="360">6 hours</option>
+                <option value="720">12 hours</option>
+                <option value="1440">24 hours</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_main_show_authors" display_group="posts_main" required_modules="posts">
+            <title>Show authors</title>
+            <description><![CDATA[
+                If your website is multi-author and you want the indexes and single posts
+                to display the author credits, enable this option.
+            ]]></description>
+            <type>boolean</type>
+        </specs>
+        
+        <specs key="posts_main_hide_category_selector" display_group="posts_main" required_modules="posts">
+            <title>Hide category selector?</title>
+            <description><![CDATA[
+                By default, a category selector will be shown <b>if there's more than one category</b> on the list.
+                You can disable it with this switch.
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_main_hide_search_helper" display_group="posts_main" required_modules="posts">
+            <title>Hide search?</title>
+            <description><![CDATA[
+                By default, a search control will be shown on the navbar.
+                You can disable it with this switch.
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_main_hide_quick_post_trigger" display_group="posts_main" required_modules="posts">
+            <title>Hide quick post floating action button?</title>
+            <description><![CDATA[
+                By default, an action button to add a quick post is added
+                at the bottom of the registered users viewport.
+                Use this switch to disable it. 
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_main_quick_post_trigger_levels_allowed" display_group="posts_main" required_modules="posts">
+            <title>User levels allowed to see the quick post action button</title>
+            <description><![CDATA[
+                Specify a list of comma-separated user levels that will see the
+                quick post floating action button. 
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <!-- ========================================================================================= -->
+        <specs is_separator="true" display_group="posts_main" required_modules="posts">Apariencia </specs>
+        <!-- ========================================================================================= -->
+        
+        <specs key="posts_main_color_theme" display_group="posts_main" required_modules="posts">
+            <title>Color theme</title>
+            <description><![CDATA[
+                Select a color theme to show the service index and contents.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value=""               >Blue (predeterminado)</option>
+                <option value="theme-lightblue">Light blue</option>
+                <option value="theme-gray"     >Gray</option>
+                <option value="theme-red"      >Red</option>
+                <option value="theme-pink"     >Pink</option>
+                <option value="theme-orange"   >Orange</option>
+                <option value="theme-yellow"   >Yellow</option>
+                <option value="theme-green"    >Green</option>
+                <option value="layout-dark theme-blue"     >Blue       on dark background</option>
+                <option value="layout-dark theme-lightblue">Light blue on dark background</option>
+                <option value="layout-dark theme-gray"     >Gray       on dark background</option>
+                <option value="layout-dark theme-red"      >Red        on dark background</option>
+                <option value="layout-dark theme-pink"     >Pink       on dark background</option>
+                <option value="layout-dark theme-orange"   >Orange     on dark background</option>
+                <option value="layout-dark theme-yellow"   >Yellow     on dark background</option>
+                <option value="layout-dark theme-green"    >Green      on dark background</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_main_standard_icon" display_group="posts_main" required_modules="posts">
+            <title>Standard service icon</title>
+            <description><![CDATA[
+                The mobile platform uses different icons for iOS and Android.
+                For iOS, it uses the Framework7 set and for Android it uses Font Awesome.
+                Here you must specify both sepparated by a comma, E.G.:<br><br>
+                
+                <code>home,fa-home</code><br><br>
+                
+                <i class="fa fa-warning"></i> <b>Important:</b>
+                Make sure to specify the correct icon keyname for both cases, or your website may receive
+                bad reviews because of the lack of homogeneity between platforms.
+                
+                <ul>
+                    <li><a href="http://framework7.io/icons/" target="_blank">See the Framework7 icons reference</a></li>
+                    <li><a href="http://fontawesome.io/icons/" target="_blank">See the Font Awesome reference</a></li>
+                </ul>
+                <i class="fa fa-info-circle"></i>
+                If you want to use an image, leave this value empty and use the selector below.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_main_image_icon" display_group="posts_main" required_modules="posts">
+            <title>Graphical service icon</title>
+            <description><![CDATA[
+                You can use an image instead of an standard icon for the service using this selector.<br>
+                <i class="fa fa-info-circle"></i>
+                A 256x256 pixels PNG with transparent background is preferred.
+                <b>Do not use rectangular images.</b> Stick to a square aspect ratio.
+            ]]></description>
+            <type>@gallery:specs_renderer/image_selector</type>
+            <options>
+                <image_size>full</image_size>
+            </options>
+        </specs>
+        
+        <!-- ====================================================================================== -->
+        <!-- ====================================================================================== -->
+        <!-- ====================================================================================== -->
+        
+        <specs key="posts_alt1_configurator" required_modules="posts" highlight_class="enabled">
+            <title>Services: Posts / Alternate index 1</title>
+            <description><![CDATA[
+                Alternate posts index.
+                Use the options on this container to define the appearance and functionality of this service.
+            ]]></description>
+            <type>button</type>
+            <options>
+                <caption><![CDATA[
+                    <i class="fa fa-cog"></i> Configure
+                ]]></caption>
+                <onclick>open_settings_display_group("mobile_controller", "posts_alt1", "Posts / Alt. index 1"); return false;</onclick>
+            </options>
+        </specs>
+        
+        <!-- ====================================================================================== -->
+        <specs is_separator="true" display_group="posts_alt1" required_modules="posts">Behavior</specs>
+        <!-- ====================================================================================== -->
+        
+        <specs key="posts_alt1_style" display_group="posts_alt1" required_modules="posts">
+            <title>Display style</title>
+            <description><![CDATA[
+                Select the display style of the posts index:
+                <ul>
+                    <li>
+                        <b>Simple cards wall:</b>
+                        Only text, dividing details in sections.
+                    </li>
+                    <li>
+                        <b>"Modern" style cards:</b>
+                        Shows the title in white with a dark shadow
+                        <b>inside</b> the featured image on each post.
+                    </li>
+                    <li>
+                        <b>Facebook style cards:</b>
+                        Divided in three sections:
+                        Author details and publishing date on the header,
+                        Title, featured image and excerpt on another section
+                        and an extra section with additional details (comments, etc.)
+                    </li>
+                    <li>
+                        <b>Reddit style cards:</b>
+                        Quick view index with thumbnails (no excerpts).
+                        Doesn't include comments, only the total.
+                    </li>
+                </ul>
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value="feed/cards:simple"  >Simple cards wall</option>
+                <option value="feed/cards:modern"  >"Modern" style cards</option>
+                <option value="feed/cards:facebook">Facebook style cards</option>
+                <option value="feed/cards:reddit"  >Reddit style cards</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt1_permitted_levels" display_group="posts_alt1" required_modules="posts">
+            <title>Permitted levels for inclusion</title>
+            <description><![CDATA[
+                If you want this service to show contents only to users with certain levels,
+                specify them here separated by commas.
+                If empty, everyone (registered or not) will show this index.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_alt1_batch_size" display_group="posts_alt1" required_modules="posts">
+            <title>Posts per screen</title>
+            <description><![CDATA[
+                Specify the amount of posts to download per screen.<br>
+                Default value: <code>10</code>.
+            ]]></description>
+            <type>number</type>
+        </specs>
+        
+        <specs key="posts_alt1_comments_in_index" display_group="posts_alt1" required_modules="posts">
+            <title>Include comments</title>
+            <description><![CDATA[
+                Enable this switch to include comments on the index.<br>
+                <i class="fa fa-info-circle"></i> Note:
+                This option will be ignored if the comments system is disabled
+                or overriden by a module with an external source, like the <b>Facebook
+                Comments</b> module.
+            ]]></description>
+            <type>boolean</type>
+        </specs>
+        
+        <specs key="posts_alt1_listed_categories" display_group="posts_alt1" required_modules="posts">
+            <title>Categories to include</title>
+            <description><![CDATA[
+                List of category slugs to show on this index.
+                If empty, all of them will be included.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt1_excluded_categories" display_group="posts_alt1" required_modules="posts">
+            <title>Excluded categories</title>
+            <description><![CDATA[
+                List of category slugs that will be excluded from this index.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt1_listed_hashtags" display_group="posts_alt1" required_modules="posts">
+            <title>Limit to these tags</title>
+            <description><![CDATA[
+                If you want to show posts that have certain hashtags,
+                specify them here, one per line.
+                The posts that have at least one of the tags on this list will be included.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt1_excluded_hashtags" display_group="posts_alt1" required_modules="posts">
+            <title>Exclude posts with these tags</title>
+            <description><![CDATA[
+                If you want to exclude posts with certain hashtags, specify them here, one per line.
+                The posts that have at least one of the tags on this list will be excluded.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt1_listed_author_levels" display_group="posts_alt1" required_modules="posts">
+            <title>Limit to these author levels</title>
+            <description><![CDATA[
+                If you want to show posts of only certain author levels, specify them here, separated by commas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_alt1_excluded_author_levels" display_group="posts_alt1" required_modules="posts">
+            <title>Exclude the next author levels</title>
+            <description><![CDATA[
+                If you want to exclude posts from certain author levels, specify them here, separated by commas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <!-- ============================================================================================ -->
+        <specs is_separator="true" display_group="posts_alt1" required_modules="posts">Funcionalidad </specs>
+        <!-- ============================================================================================ -->
+        
+        <specs key="posts_alt1_auto_refresh" display_group="posts_alt1" required_modules="posts">
+            <title>Automatic reload</title>
+            <description><![CDATA[
+                Select the automatic reload interval for the channel.<br>
+                <i class="fa fa-info-circle"></i> <b>Note:</b>
+                Select an interval higher than the posts caching parameters you specified for the
+                posts module to avoid unnecessary calls to the database.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value="">Disabled</option>
+                <option value="10">10 minutes</option>
+                <option value="20">20 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="60">1 hour</option>
+                <option value="120">2 hours</option>
+                <option value="180">3 hours</option>
+                <option value="360">6 hours</option>
+                <option value="720">12 hours</option>
+                <option value="1440">24 hours</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt1_show_authors" display_group="posts_alt1" required_modules="posts">
+            <title>Show authors</title>
+            <description><![CDATA[
+                If your website is multi-author and you want the indexes and single posts
+                to display the author credits, enable this option.
+            ]]></description>
+            <type>boolean</type>
+        </specs>
+        
+        <specs key="posts_alt1_hide_category_selector" display_group="posts_alt1" required_modules="posts">
+            <title>Hide category selector?</title>
+            <description><![CDATA[
+                By default, a category selector will be shown <b>if there's more than one category</b> on the list.
+                You can disable it with this switch.
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt1_hide_search_helper" display_group="posts_alt1" required_modules="posts">
+            <title>Hide search?</title>
+            <description><![CDATA[
+                By default, a search control will be shown on the navbar.
+                You can disable it with this switch.
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt1_hide_quick_post_trigger" display_group="posts_alt1" required_modules="posts">
+            <title>Hide quick post floating action button?</title>
+            <description><![CDATA[
+                By default, an action button to add a quick post is added
+                at the bottom of the registered users viewport.
+                Use this switch to disable it. 
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt1_quick_post_trigger_levels_allowed" display_group="posts_alt1" required_modules="posts">
+            <title>User levels allowed to see the quick post action button</title>
+            <description><![CDATA[
+                Specify a list of comma-separated user levels that will see the
+                quick post floating action button. 
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <!-- ========================================================================================= -->
+        <specs is_separator="true" display_group="posts_alt1" required_modules="posts">Apariencia </specs>
+        <!-- ========================================================================================= -->
+        
+        <specs key="posts_alt1_color_theme" display_group="posts_alt1" required_modules="posts">
+            <title>Color theme</title>
+            <description><![CDATA[
+                Select a color theme to show the service index and contents.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value=""               >Blue (predeterminado)</option>
+                <option value="theme-lightblue">Light blue</option>
+                <option value="theme-gray"     >Gray</option>
+                <option value="theme-red"      >Red</option>
+                <option value="theme-pink"     >Pink</option>
+                <option value="theme-orange"   >Orange</option>
+                <option value="theme-yellow"   >Yellow</option>
+                <option value="theme-green"    >Green</option>
+                <option value="layout-dark theme-blue"     >Blue       on dark background</option>
+                <option value="layout-dark theme-lightblue">Light blue on dark background</option>
+                <option value="layout-dark theme-gray"     >Gray       on dark background</option>
+                <option value="layout-dark theme-red"      >Red        on dark background</option>
+                <option value="layout-dark theme-pink"     >Pink       on dark background</option>
+                <option value="layout-dark theme-orange"   >Orange     on dark background</option>
+                <option value="layout-dark theme-yellow"   >Yellow     on dark background</option>
+                <option value="layout-dark theme-green"    >Green      on dark background</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt1_standard_icon" display_group="posts_alt1" required_modules="posts">
+            <title>Standard service icon</title>
+            <description><![CDATA[
+                The mobile platform uses different icons for iOS and Android.
+                For iOS, it uses the Framework7 set and for Android it uses Font Awesome.
+                Here you must specify both sepparated by a comma, E.G.:<br><br>
+                
+                <code>home,fa-home</code><br><br>
+                
+                <i class="fa fa-warning"></i> <b>Important:</b>
+                Make sure to specify the correct icon keyname for both cases, or your website may receive
+                bad reviews because of the lack of homogeneity between platforms.
+                
+                <ul>
+                    <li><a href="http://framework7.io/icons/" target="_blank">See the Framework7 icons reference</a></li>
+                    <li><a href="http://fontawesome.io/icons/" target="_blank">See the Font Awesome reference</a></li>
+                </ul>
+                <i class="fa fa-info-circle"></i>
+                If you want to use an image, leave this value empty and use the selector below.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_alt1_image_icon" display_group="posts_alt1" required_modules="posts">
+            <title>Graphical service icon</title>
+            <description><![CDATA[
+                You can use an image instead of an standard icon for the service using this selector.<br>
+                <i class="fa fa-info-circle"></i>
+                A 256x256 pixels PNG with transparent background is preferred.
+                <b>Do not use rectangular images.</b> Stick to a square aspect ratio.
+            ]]></description>
+            <type>@gallery:specs_renderer/image_selector</type>
+            <options>
+                <image_size>full</image_size>
+            </options>
+        </specs>
+        
+        <!-- ====================================================================================== -->
+        <!-- ====================================================================================== -->
+        <!-- ====================================================================================== -->
+        
+        <specs key="posts_alt2_configurator" required_modules="posts" highlight_class="enabled">
+            <title>Services: Posts / Alternate index 2</title>
+            <description><![CDATA[
+                Alternate posts index.
+                Use the options on this container to define the appearance and functionality of this service.
+            ]]></description>
+            <type>button</type>
+            <options>
+                <caption><![CDATA[
+                    <i class="fa fa-cog"></i> Configure
+                ]]></caption>
+                <onclick>open_settings_display_group("mobile_controller", "posts_alt2", "Posts / Alt. index 2"); return false;</onclick>
+            </options>
+        </specs>
+        
+        <!-- ====================================================================================== -->
+        <specs is_separator="true" display_group="posts_alt2" required_modules="posts">Behavior</specs>
+        <!-- ====================================================================================== -->
+        
+        <specs key="posts_alt2_style" display_group="posts_alt2" required_modules="posts">
+            <title>Display style</title>
+            <description><![CDATA[
+                Select the display style of the posts index:
+                <ul>
+                    <li>
+                        <b>Simple cards wall:</b>
+                        Only text, dividing details in sections.
+                    </li>
+                    <li>
+                        <b>"Modern" style cards:</b>
+                        Shows the title in white with a dark shadow
+                        <b>inside</b> the featured image on each post.
+                    </li>
+                    <li>
+                        <b>Facebook style cards:</b>
+                        Divided in three sections:
+                        Author details and publishing date on the header,
+                        Title, featured image and excerpt on another section
+                        and an extra section with additional details (comments, etc.)
+                    </li>
+                    <li>
+                        <b>Reddit style cards:</b>
+                        Quick view index with thumbnails (no excerpts).
+                        Doesn't include comments, only the total.
+                    </li>
+                </ul>
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value="feed/cards:simple"  >Simple cards wall</option>
+                <option value="feed/cards:modern"  >"Modern" style cards</option>
+                <option value="feed/cards:facebook">Facebook style cards</option>
+                <option value="feed/cards:reddit"  >Reddit style cards</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt2_permitted_levels" display_group="posts_alt2" required_modules="posts">
+            <title>Permitted levels for inclusion</title>
+            <description><![CDATA[
+                If you want this service to show contents only to users with certain levels,
+                specify them here separated by commas.
+                If empty, everyone (registered or not) will show this index.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_alt2_batch_size" display_group="posts_alt2" required_modules="posts">
+            <title>Posts per screen</title>
+            <description><![CDATA[
+                Specify the amount of posts to download per screen.<br>
+                Default value: <code>10</code>.
+            ]]></description>
+            <type>number</type>
+        </specs>
+        
+        <specs key="posts_alt2_comments_in_index" display_group="posts_alt2" required_modules="posts">
+            <title>Include comments</title>
+            <description><![CDATA[
+                Enable this switch to include comments on the index.<br>
+                <i class="fa fa-info-circle"></i> Note:
+                This option will be ignored if the comments system is disabled
+                or overriden by a module with an external source, like the <b>Facebook
+                Comments</b> module.
+            ]]></description>
+            <type>boolean</type>
+        </specs>
+        
+        <specs key="posts_alt2_listed_categories" display_group="posts_alt2" required_modules="posts">
+            <title>Categories to include</title>
+            <description><![CDATA[
+                List of category slugs to show on this index.
+                If empty, all of them will be included.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt2_excluded_categories" display_group="posts_alt2" required_modules="posts">
+            <title>Excluded categories</title>
+            <description><![CDATA[
+                List of category slugs that will be excluded from this index.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt2_listed_hashtags" display_group="posts_alt2" required_modules="posts">
+            <title>Limit to these tags</title>
+            <description><![CDATA[
+                If you want to show posts that have certain hashtags,
+                specify them here, one per line.
+                The posts that have at least one of the tags on this list will be included.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt2_excluded_hashtags" display_group="posts_alt2" required_modules="posts">
+            <title>Exclude posts with these tags</title>
+            <description><![CDATA[
+                If you want to exclude posts with certain hashtags, specify them here, one per line.
+                The posts that have at least one of the tags on this list will be excluded.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt2_listed_author_levels" display_group="posts_alt2" required_modules="posts">
+            <title>Limit to these author levels</title>
+            <description><![CDATA[
+                If you want to show posts of only certain author levels, specify them here, separated by commas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_alt2_excluded_author_levels" display_group="posts_alt2" required_modules="posts">
+            <title>Exclude the next author levels</title>
+            <description><![CDATA[
+                If you want to exclude posts from certain author levels, specify them here, separated by commas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <!-- ============================================================================================ -->
+        <specs is_separator="true" display_group="posts_alt2" required_modules="posts">Funcionalidad </specs>
+        <!-- ============================================================================================ -->
+        
+        <specs key="posts_alt2_auto_refresh" display_group="posts_alt2" required_modules="posts">
+            <title>Automatic reload</title>
+            <description><![CDATA[
+                Select the automatic reload interval for the channel.<br>
+                <i class="fa fa-info-circle"></i> <b>Note:</b>
+                Select an interval higher than the posts caching parameters you specified for the
+                posts module to avoid unnecessary calls to the database.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value="">Disabled</option>
+                <option value="10">10 minutes</option>
+                <option value="20">20 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="60">1 hour</option>
+                <option value="120">2 hours</option>
+                <option value="180">3 hours</option>
+                <option value="360">6 hours</option>
+                <option value="720">12 hours</option>
+                <option value="1440">24 hours</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt2_show_authors" display_group="posts_alt2" required_modules="posts">
+            <title>Show authors</title>
+            <description><![CDATA[
+                If your website is multi-author and you want the indexes and single posts
+                to display the author credits, enable this option.
+            ]]></description>
+            <type>boolean</type>
+        </specs>
+        
+        <specs key="posts_alt2_hide_category_selector" display_group="posts_alt2" required_modules="posts">
+            <title>Hide category selector?</title>
+            <description><![CDATA[
+                By default, a category selector will be shown <b>if there's more than one category</b> on the list.
+                You can disable it with this switch.
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt2_hide_search_helper" display_group="posts_alt2" required_modules="posts">
+            <title>Hide search?</title>
+            <description><![CDATA[
+                By default, a search control will be shown on the navbar.
+                You can disable it with this switch.
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt2_hide_quick_post_trigger" display_group="posts_alt2" required_modules="posts">
+            <title>Hide quick post floating action button?</title>
+            <description><![CDATA[
+                By default, an action button to add a quick post is added
+                at the bottom of the registered users viewport.
+                Use this switch to disable it. 
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt2_quick_post_trigger_levels_allowed" display_group="posts_alt2" required_modules="posts">
+            <title>User levels allowed to see the quick post action button</title>
+            <description><![CDATA[
+                Specify a list of comma-separated user levels that will see the
+                quick post floating action button. 
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <!-- ========================================================================================= -->
+        <specs is_separator="true" display_group="posts_alt2" required_modules="posts">Apariencia </specs>
+        <!-- ========================================================================================= -->
+        
+        <specs key="posts_alt2_color_theme" display_group="posts_alt2" required_modules="posts">
+            <title>Color theme</title>
+            <description><![CDATA[
+                Select a color theme to show the service index and contents.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value=""               >Blue (predeterminado)</option>
+                <option value="theme-lightblue">Light blue</option>
+                <option value="theme-gray"     >Gray</option>
+                <option value="theme-red"      >Red</option>
+                <option value="theme-pink"     >Pink</option>
+                <option value="theme-orange"   >Orange</option>
+                <option value="theme-yellow"   >Yellow</option>
+                <option value="theme-green"    >Green</option>
+                <option value="layout-dark theme-blue"     >Blue       on dark background</option>
+                <option value="layout-dark theme-lightblue">Light blue on dark background</option>
+                <option value="layout-dark theme-gray"     >Gray       on dark background</option>
+                <option value="layout-dark theme-red"      >Red        on dark background</option>
+                <option value="layout-dark theme-pink"     >Pink       on dark background</option>
+                <option value="layout-dark theme-orange"   >Orange     on dark background</option>
+                <option value="layout-dark theme-yellow"   >Yellow     on dark background</option>
+                <option value="layout-dark theme-green"    >Green      on dark background</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt2_standard_icon" display_group="posts_alt2" required_modules="posts">
+            <title>Standard service icon</title>
+            <description><![CDATA[
+                The mobile platform uses different icons for iOS and Android.
+                For iOS, it uses the Framework7 set and for Android it uses Font Awesome.
+                Here you must specify both sepparated by a comma, E.G.:<br><br>
+                
+                <code>home,fa-home</code><br><br>
+                
+                <i class="fa fa-warning"></i> <b>Important:</b>
+                Make sure to specify the correct icon keyname for both cases, or your website may receive
+                bad reviews because of the lack of homogeneity between platforms.
+                
+                <ul>
+                    <li><a href="http://framework7.io/icons/" target="_blank">See the Framework7 icons reference</a></li>
+                    <li><a href="http://fontawesome.io/icons/" target="_blank">See the Font Awesome reference</a></li>
+                </ul>
+                <i class="fa fa-info-circle"></i>
+                If you want to use an image, leave this value empty and use the selector below.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_alt2_image_icon" display_group="posts_alt2" required_modules="posts">
+            <title>Graphical service icon</title>
+            <description><![CDATA[
+                You can use an image instead of an standard icon for the service using this selector.<br>
+                <i class="fa fa-info-circle"></i>
+                A 256x256 pixels PNG with transparent background is preferred.
+                <b>Do not use rectangular images.</b> Stick to a square aspect ratio.
+            ]]></description>
+            <type>@gallery:specs_renderer/image_selector</type>
+            <options>
+                <image_size>full</image_size>
+            </options>
+        </specs>
+        
+        <!-- ====================================================================================== -->
+        <!-- ====================================================================================== -->
+        <!-- ====================================================================================== -->
+        
+        <specs key="posts_alt3_configurator" required_modules="posts" highlight_class="enabled">
+            <title>Services: Posts / Alternate index 3</title>
+            <description><![CDATA[
+                Alternate posts index.
+                Use the options on this container to define the appearance and functionality of this service.
+            ]]></description>
+            <type>button</type>
+            <options>
+                <caption><![CDATA[
+                    <i class="fa fa-cog"></i> Configure
+                ]]></caption>
+                <onclick>open_settings_display_group("mobile_controller", "posts_alt3", "Posts / Alt. index 3"); return false;</onclick>
+            </options>
+        </specs>
+        
+        <!-- ====================================================================================== -->
+        <specs is_separator="true" display_group="posts_alt3" required_modules="posts">Behavior</specs>
+        <!-- ====================================================================================== -->
+        
+        <specs key="posts_alt3_style" display_group="posts_alt3" required_modules="posts">
+            <title>Display style</title>
+            <description><![CDATA[
+                Select the display style of the posts index:
+                <ul>
+                    <li>
+                        <b>Simple cards wall:</b>
+                        Only text, dividing details in sections.
+                    </li>
+                    <li>
+                        <b>"Modern" style cards:</b>
+                        Shows the title in white with a dark shadow
+                        <b>inside</b> the featured image on each post.
+                    </li>
+                    <li>
+                        <b>Facebook style cards:</b>
+                        Divided in three sections:
+                        Author details and publishing date on the header,
+                        Title, featured image and excerpt on another section
+                        and an extra section with additional details (comments, etc.)
+                    </li>
+                    <li>
+                        <b>Reddit style cards:</b>
+                        Quick view index with thumbnails (no excerpts).
+                        Doesn't include comments, only the total.
+                    </li>
+                </ul>
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value="feed/cards:simple"  >Simple cards wall</option>
+                <option value="feed/cards:modern"  >"Modern" style cards</option>
+                <option value="feed/cards:facebook">Facebook style cards</option>
+                <option value="feed/cards:reddit"  >Reddit style cards</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt3_permitted_levels" display_group="posts_alt3" required_modules="posts">
+            <title>Permitted levels for inclusion</title>
+            <description><![CDATA[
+                If you want this service to show contents only to users with certain levels,
+                specify them here separated by commas.
+                If empty, everyone (registered or not) will show this index.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_alt3_batch_size" display_group="posts_alt3" required_modules="posts">
+            <title>Posts per screen</title>
+            <description><![CDATA[
+                Specify the amount of posts to download per screen.<br>
+                Default value: <code>10</code>.
+            ]]></description>
+            <type>number</type>
+        </specs>
+        
+        <specs key="posts_alt3_comments_in_index" display_group="posts_alt3" required_modules="posts">
+            <title>Include comments</title>
+            <description><![CDATA[
+                Enable this switch to include comments on the index.<br>
+                <i class="fa fa-info-circle"></i> Note:
+                This option will be ignored if the comments system is disabled
+                or overriden by a module with an external source, like the <b>Facebook
+                Comments</b> module.
+            ]]></description>
+            <type>boolean</type>
+        </specs>
+        
+        <specs key="posts_alt3_listed_categories" display_group="posts_alt3" required_modules="posts">
+            <title>Categories to include</title>
+            <description><![CDATA[
+                List of category slugs to show on this index.
+                If empty, all of them will be included.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt3_excluded_categories" display_group="posts_alt3" required_modules="posts">
+            <title>Excluded categories</title>
+            <description><![CDATA[
+                List of category slugs that will be excluded from this index.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt3_listed_hashtags" display_group="posts_alt3" required_modules="posts">
+            <title>Limit to these tags</title>
+            <description><![CDATA[
+                If you want to show posts that have certain hashtags,
+                specify them here, one per line.
+                The posts that have at least one of the tags on this list will be included.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt3_excluded_hashtags" display_group="posts_alt3" required_modules="posts">
+            <title>Exclude posts with these tags</title>
+            <description><![CDATA[
+                If you want to exclude posts with certain hashtags, specify them here, one per line.
+                The posts that have at least one of the tags on this list will be excluded.
+            ]]></description>
+            <type>code</type>
+        </specs>
+        
+        <specs key="posts_alt3_listed_author_levels" display_group="posts_alt3" required_modules="posts">
+            <title>Limit to these author levels</title>
+            <description><![CDATA[
+                If you want to show posts of only certain author levels, specify them here, separated by commas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_alt3_excluded_author_levels" display_group="posts_alt3" required_modules="posts">
+            <title>Exclude the next author levels</title>
+            <description><![CDATA[
+                If you want to exclude posts from certain author levels, specify them here, separated by commas.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <!-- ============================================================================================ -->
+        <specs is_separator="true" display_group="posts_alt3" required_modules="posts">Funcionalidad </specs>
+        <!-- ============================================================================================ -->
+        
+        <specs key="posts_alt3_auto_refresh" display_group="posts_alt3" required_modules="posts">
+            <title>Automatic reload</title>
+            <description><![CDATA[
+                Select the automatic reload interval for the channel.<br>
+                <i class="fa fa-info-circle"></i> <b>Note:</b>
+                Select an interval higher than the posts caching parameters you specified for the
+                posts module to avoid unnecessary calls to the database.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value="">Disabled</option>
+                <option value="10">10 minutes</option>
+                <option value="20">20 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="60">1 hour</option>
+                <option value="120">2 hours</option>
+                <option value="180">3 hours</option>
+                <option value="360">6 hours</option>
+                <option value="720">12 hours</option>
+                <option value="1440">24 hours</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt3_show_authors" display_group="posts_alt3" required_modules="posts">
+            <title>Show authors</title>
+            <description><![CDATA[
+                If your website is multi-author and you want the indexes and single posts
+                to display the author credits, enable this option.
+            ]]></description>
+            <type>boolean</type>
+        </specs>
+        
+        <specs key="posts_alt3_hide_category_selector" display_group="posts_alt3" required_modules="posts">
+            <title>Hide category selector?</title>
+            <description><![CDATA[
+                By default, a category selector will be shown <b>if there's more than one category</b> on the list.
+                You can disable it with this switch.
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt3_hide_search_helper" display_group="posts_alt3" required_modules="posts">
+            <title>Hide search?</title>
+            <description><![CDATA[
+                By default, a search control will be shown on the navbar.
+                You can disable it with this switch.
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt3_hide_quick_post_trigger" display_group="posts_alt3" required_modules="posts">
+            <title>Hide quick post floating action button?</title>
+            <description><![CDATA[
+                By default, an action button to add a quick post is added
+                at the bottom of the registered users viewport.
+                Use this switch to disable it. 
+            ]]></description>
+            <type>yes/no</type>
+        </specs>
+        
+        <specs key="posts_alt3_quick_post_trigger_levels_allowed" display_group="posts_alt3" required_modules="posts">
+            <title>User levels allowed to see the quick post action button</title>
+            <description><![CDATA[
+                Specify a list of comma-separated user levels that will see the
+                quick post floating action button. 
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <!-- ========================================================================================= -->
+        <specs is_separator="true" display_group="posts_alt3" required_modules="posts">Apariencia </specs>
+        <!-- ========================================================================================= -->
+        
+        <specs key="posts_alt3_color_theme" display_group="posts_alt3" required_modules="posts">
+            <title>Color theme</title>
+            <description><![CDATA[
+                Select a color theme to show the service index and contents.
+            ]]></description>
+            <type>list</type>
+            <options>
+                <option value=""               >Blue (predeterminado)</option>
+                <option value="theme-lightblue">Light blue</option>
+                <option value="theme-gray"     >Gray</option>
+                <option value="theme-red"      >Red</option>
+                <option value="theme-pink"     >Pink</option>
+                <option value="theme-orange"   >Orange</option>
+                <option value="theme-yellow"   >Yellow</option>
+                <option value="theme-green"    >Green</option>
+                <option value="layout-dark theme-blue"     >Blue       on dark background</option>
+                <option value="layout-dark theme-lightblue">Light blue on dark background</option>
+                <option value="layout-dark theme-gray"     >Gray       on dark background</option>
+                <option value="layout-dark theme-red"      >Red        on dark background</option>
+                <option value="layout-dark theme-pink"     >Pink       on dark background</option>
+                <option value="layout-dark theme-orange"   >Orange     on dark background</option>
+                <option value="layout-dark theme-yellow"   >Yellow     on dark background</option>
+                <option value="layout-dark theme-green"    >Green      on dark background</option>
+            </options>
+        </specs>
+        
+        <specs key="posts_alt3_standard_icon" display_group="posts_alt3" required_modules="posts">
+            <title>Standard service icon</title>
+            <description><![CDATA[
+                The mobile platform uses different icons for iOS and Android.
+                For iOS, it uses the Framework7 set and for Android it uses Font Awesome.
+                Here you must specify both sepparated by a comma, E.G.:<br><br>
+                
+                <code>home,fa-home</code><br><br>
+                
+                <i class="fa fa-warning"></i> <b>Important:</b>
+                Make sure to specify the correct icon keyname for both cases, or your website may receive
+                bad reviews because of the lack of homogeneity between platforms.
+                
+                <ul>
+                    <li><a href="http://framework7.io/icons/" target="_blank">See the Framework7 icons reference</a></li>
+                    <li><a href="http://fontawesome.io/icons/" target="_blank">See the Font Awesome reference</a></li>
+                </ul>
+                <i class="fa fa-info-circle"></i>
+                If you want to use an image, leave this value empty and use the selector below.
+            ]]></description>
+            <type>text</type>
+        </specs>
+        
+        <specs key="posts_alt3_image_icon" display_group="posts_alt3" required_modules="posts">
+            <title>Graphical service icon</title>
+            <description><![CDATA[
+                You can use an image instead of an standard icon for the service using this selector.<br>
+                <i class="fa fa-info-circle"></i>
+                A 256x256 pixels PNG with transparent background is preferred.
+                <b>Do not use rectangular images.</b> Stick to a square aspect ratio.
+            ]]></description>
+            <type>@gallery:specs_renderer/image_selector</type>
+            <options>
+                <image_size>full</image_size>
+            </options>
+        </specs>
         
     </exported_settings_data>
     
