@@ -13,6 +13,9 @@ use hng2_modules\posts\post_record;
 
 class post_item extends feed_item
 {
+    protected static $all_countries  = array();
+    protected static $all_categories = array();
+    
     public function prepare(post_record $post)
     {
         global $account, $config, $modules, $language;
@@ -327,10 +330,14 @@ class post_item extends feed_item
     {
         global $database;
         
+        if( ! empty(self::$all_countries) ) return self::$all_countries;
+        
         $all_countries = array();
         $res = $database->query("select * from countries order by alpha_2 asc");
         while($row = $database->fetch_object($res))
             $all_countries[$row->alpha_2] = $row->name;
+        
+        self::$all_countries = $all_countries;
         
         return $all_countries;
     }
@@ -340,11 +347,15 @@ class post_item extends feed_item
      */
     protected function get_all_categories()
     {
+        if( ! empty(self::$all_categories) ) return self::$all_categories;
+        
         $categories_repository = new categories_repository();
         
         $all_categories = array();
         $raw_categories = $categories_repository->find(array(), 0, 0, "id_category asc");
         foreach($raw_categories as $category) $all_categories[$category->id_category] = $category;
+        
+        self::$all_categories = $all_categories;
         
         return $all_categories;
     }
