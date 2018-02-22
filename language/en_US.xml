@@ -67,10 +67,13 @@
     <remote_quick_post>
         <title>Create quick post</title>
         <contents>
-            <placeholder>Enter the contents of your post. You can add #hashtags as you normally do everywhere. Use the control below to attach images and videos.</placeholder>
+            <placeholder>Enter the contents of your post. You can add #hashtags as you normally do everywhere.</placeholder>
         </contents>
         <attachments>
-            <title>Attach photos/videos</title>
+            <title><![CDATA[
+                <span class="ios-only">Attach images/videos</span>
+                <span class="android-only">Attach images</span>
+            ]]></title>
         </attachments>
     </remote_quick_post>
     

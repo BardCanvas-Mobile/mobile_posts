@@ -69,10 +69,13 @@
     <remote_quick_post>
         <title>Crear entrada rápida</title>
         <contents>
-            <placeholder>Introduce el contenido de tu entrada. Puedes añadir #etiquetas como haces en cualquier otro lado. Usa el control debajo para anexar imágenes y videos.</placeholder>
+            <placeholder>Introduce el contenido de tu entrada. Puedes añadir #etiquetas como haces en cualquier otro lado.</placeholder>
         </contents>
         <attachments>
-            <title>Anexar fotos/videos</title>
+            <title><![CDATA[
+                <span class="ios-only">Anexar imágenes/videos</span>
+                <span class="android-only">Anexar imágenes</span>
+            ]]></title>
         </attachments>
     </remote_quick_post>
     
