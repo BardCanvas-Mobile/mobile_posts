@@ -1,6 +1,10 @@
 
 # Mobile Posts Change Log
 
+## [0.0.4] - 2018-02-21
+
+- Changed captions on language files to suit platform limitations.
+
 ## [0.0.3] - 2018-01-31
 
 - Added static resource lists to post_item class to reduce impact on the database.
