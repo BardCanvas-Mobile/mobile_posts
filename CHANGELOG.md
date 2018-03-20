@@ -1,6 +1,10 @@
 
 # Mobile Posts Change Log
 
+## [0.0.5] - 2018-03-19
+
+- Passed BCM version on web requests.
+
 ## [0.0.4] - 2018-02-21
 
 - Changed captions on language files to suit platform limitations.
