@@ -7,6 +7,7 @@
  * 
  * @param string "bcm_access_token"
  * @param string "bcm_platform"     ios|android
+ * @param string "bcm_version"      
  * @param string "scope"            posts_main|posts_alt1|posts_alt2|posts_alt3
  * @param bool   "for_selection"    Optional, if provided, first item will have a "select category" caption.
  * @param string "callback"         Optional, for AJAX call

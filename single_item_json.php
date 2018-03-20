@@ -7,6 +7,7 @@
  * 
  * @param string "bcm_access_token"
  * @param string "bcm_platform"     ios|android
+ * @param string "bcm_version"
  * @param string "id"               id of the post
  * @param string "callback"         Optional, for AJAX call
  * 
